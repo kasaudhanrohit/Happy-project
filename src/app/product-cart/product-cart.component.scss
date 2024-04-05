@@ -1,0 +1,92 @@
+.loaderhome {
+    filter: hue-rotate(0deg);
+    background: linear-gradient(45deg, #0f8, #08f);
+    animation: hue 10000ms infinite linear;
+}
+
+
+.p-datatable .p-datatable-tbody>tr {
+    background: none;
+}
+
+.p-datatable .p-datatable-thead>tr>th {
+    padding: 6px;
+    text-align: center;
+    color: fieldtext;
+}
+
+.p-datatable .p-datatable-tbody>tr>td {
+    padding: 0px;
+    text-align: center;
+    color: fieldtext;
+    padding-left: 10px;
+}
+
+.p-datatable .p-datatable-tbody>tr>td:last-child {
+    border-right-width: 3px;
+}
+
+.p-datatable .p-datatable-header {
+    text-align: center;
+    color: fieldtext;
+}
+
+
+.tableimg {
+    max-width: 65px;
+    box-shadow: none;
+    margin-bottom: 0;
+    border-radius: 5px;
+}
+
+.content-center {
+    justify-content: center;
+}
+
+.checkout-btn:hover {
+    background: #051922;
+    color: white;
+}
+
+.checkout-btn {
+    background: none;
+    cursor: pointer;
+    position: relative;
+    color: black;
+        padding: 3px 18px;
+        margin: 2px;
+        border: 3px solid black;
+        border-radius: 21px;
+        cursor: pointer;
+    width: 140px;
+    //color: white;
+    //border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    //padding: 0.75rem 1rem;
+    // box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    //     0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
+    //     0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    //     0 100px 80px rgba(0, 0, 0, 0.07);
+
+    // &:hover {
+    //     background: darken(#3498db, 10%);
+    // }
+
+    &__success {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+
+        span {
+            margin-right: 0.5rem;
+        }
+    }
+}

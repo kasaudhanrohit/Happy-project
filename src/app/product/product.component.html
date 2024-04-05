@@ -1,0 +1,57 @@
+<app-loader *ngIf="busy"></app-loader>
+<app-nav-bar></app-nav-bar>
+<div class="product-section  loaderhome">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center mt-50">
+                <div class="section-title">
+                    <h3><span class="orange-text">Our</span> Products</h3>
+                    <p>Welcome to AyodhyaWasi Apna Store – Authenticity Unveiled
+
+                        Discover the essence of true craftsmanship with AyodhyaWasi ApnaAtta, where tradition meets
+                        innovation. Our products
+                        have been carefully crafted to bring to you a unique blend of heritage and modernity, ensuring a
+                        unique experience for
+                        our customers.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6 text-center" *ngFor="let productitem of finalproductinfo;let j=index">
+                <div class="single-product-item">
+                    <div class="product-image">
+                        <a (click)="moreinfo(productitem.productname)"><img src="{{productitem.productimgscr}}"
+                                alt=""></a>
+                    </div>
+                    <h3>{{productitem.productname}}</h3>
+                    <p>M.R.P: <del>{{productitem.price}} </del> (Inclusive of all taxes) </p>
+                    <p>Offer Price : <span>₹{{productitem.discountprice}} (Inclusive of all taxes)</span></p>
+                    <!-- <p class="product-price">Per Kg : {{productitem.pricekg}} </p> -->
+                    <a class="cart-btn" (click)="moreinfo(productitem.productname)">Know More <i
+                            class="pi pi-angle-right"></i> </a>
+                    <a class="cart-btn" (click)="addtocart(productitem)"><i class="pi pi-shopping-cart" pBadge
+                            value="{{productitem.cartvalue == 0 ? '' : productitem.cartvalue}}"></i> Add to Cart</a>
+                    <a *ngIf="productitem.cartvalue !== 0" class="cart-btn" pTooltip="Remove to cart"
+                        (click)="removefromcart(productitem)"><i class="pi pi-caret-left"></i></a>
+                    {{productitem.cartvalue == 0 ? '' : productitem.cartvalue}}
+                    <a *ngIf="productitem.cartvalue !== 0" class="cart-btn" pTooltip="Add from cart"
+                        (click)="addtocart(productitem)"><i class="pi pi-caret-right"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- <a class="cart-btn" pTooltip="Add from cart" (click)="placeOrder()" >Place Order <i class="pi pi-truck"></i></a> -->
+    </div>
+</div>
+<div *ngIf="cartvalue  !== 0" class="placebutton">
+    <a class="cart-btn" (click)="placeOrder()">Place Your Order<i class="pi pi-shopping-cart" pBadge
+            style="margin-left: 5px;" value="{{cartvalue == 0 ? '' : cartvalue}}"></i></a>
+</div>
+<div class="scene">
+    <div class="background buildings"></div>
+    <div class="background clouds"></div>
+    <div class="road"></div>
+    <img class="truck-icon" src="../../assets/images/deliverytruck.svg" alt="delivery trucjk" />
+</div>
+
+<app-about-info></app-about-info>

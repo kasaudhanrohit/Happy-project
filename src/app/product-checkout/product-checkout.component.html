@@ -1,0 +1,158 @@
+<app-loader *ngIf="busy" ></app-loader>
+<app-nav-bar></app-nav-bar>
+
+<!-- check out section -->
+<div class="checkout-section loaderhome">
+    <div class="container" >
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center mt-50">
+                <div class="section-title">
+                    <h3><span class="orange-text">Product</span> Checkout</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 30px;">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <p-accordion [activeIndex]="0">
+                    <p-accordionTab header="Billing Address">
+                        <form [formGroup]="billingform" (click)="checked=false;isAccordionOpen=false;">
+                                <p><input type="text" formControlName="username" id="username" class="inputtext" placeholder="Name"></p>
+                                <div *ngIf="billingform.get('username').hasError('required') && billingform.get('username').touched">
+                                <span> Name is required.</span>
+                                </div>
+                                <p><input type="email" formControlName="email" id="email" class="inputtext" placeholder="Email"></p>
+                                <div *ngIf="billingform.get('email').hasError('required') && billingform.get('email').touched">
+                                    Email is required.
+                                </div>
+                                <div *ngIf="billingform.get('email').hasError('email') && billingform.get('email').touched">
+                                    Please enter a valid email address.
+                                </div>
+                                <p><input type="text" formControlName="address" id="address" class="inputtext" placeholder="Address"></p>
+                                <div *ngIf="billingform.get('address').hasError('required') && billingform.get('address').touched">
+                                    Address is required.
+                                </div>
+                                <p><input type="tel" formControlName="mobile" id="mobile" class="inputtext" placeholder="Mobile" maxlength="10"></p>
+                                <div *ngIf="billingform.get('mobile').hasError('required') && billingform.get('mobile').touched">
+                                    Mobile number is required.
+                                </div>
+                                <div *ngIf="billingform.get('mobile').hasError('pattern') && billingform.get('mobile').touched">
+                                    Please enter a valid 10-digit mobile number.
+                                </div>
+                                <p><textarea formControlName="comment" id="comment" class="inputtext" style="height: 80px;" id="bill" cols="30" rows="10" placeholder="Say Something"></textarea></p>
+                        </form>
+                    </p-accordionTab>
+                </p-accordion>
+                <div style="padding: 5px;"><span>Same as billing address</span> <p-checkbox [(ngModel)]="checked" [binary]="true" inputId="binary" (onChange)="hello()"></p-checkbox></div>
+                <p-accordion [activeIndex]="isAccordionOpen ? 0 : -1" >
+                    <p-accordionTab  header="Shipping Address">
+                    <form [formGroup]="shippingform">
+                        <p><input type="text" formControlName="username" id="username" class="inputtext" placeholder="Name"></p>
+                        <div *ngIf="billingform.get('username').hasError('required') && billingform.get('username').touched">
+                            <span> Name is required.</span>
+                        </div>
+                        <p><input type="email" formControlName="email" id="email" class="inputtext" placeholder="Email"></p>
+                        <div *ngIf="billingform.get('email').hasError('required') && billingform.get('email').touched">
+                            Email is required.
+                        </div>
+                        <div *ngIf="billingform.get('email').hasError('email') && billingform.get('email').touched">
+                            Please enter a valid email address.
+                        </div>
+                        <p><input type="text" formControlName="address" id="address" class="inputtext" placeholder="Address"></p>
+                        <div *ngIf="billingform.get('address').hasError('required') && billingform.get('address').touched">
+                            Address is required.
+                        </div>
+                        <p><input type="tel" formControlName="mobile" id="mobile" class="inputtext" placeholder="Mobile" maxlength="10"></p>
+                        <div *ngIf="billingform.get('mobile').hasError('required') && billingform.get('mobile').touched">
+                            Mobile number is required.
+                        </div>
+                        <div *ngIf="billingform.get('mobile').hasError('pattern') && billingform.get('mobile').touched">
+                            Please enter a valid 10-digit mobile number.
+                        </div>
+                        <p><textarea formControlName="comment" id="comment" class="inputtext" style="height: 80px;" id="bill" cols="30" rows="10" placeholder="Say Something"></textarea></p>
+                    </form>
+                    </p-accordionTab>
+                </p-accordion>
+
+            </div>
+
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="order-details-wrap">
+                    <p-table [value]="cartitemsinfo" [scrollable]="true" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '62rem' }">
+                        <ng-template pTemplate="caption"> Product Details </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Product Image</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-product>
+                            <tr>
+                               <td class="content-center"><img class="tableimg" src="{{product.productimgscr}}" alt=""></td>
+                                <td>{{product.productname}}</td>
+                                <td>{{product.price}}</td>
+                                <td>{{product.cartvalue}}</td>
+                                <td>₹{{product.cartvalue * product.discountprice}}</td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage" let-columns>
+                            <tr>
+                                <td [attr.colspan]="4" style="text-align: center;color: fieldtext;">
+                                 No Product Added To The Cart
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                    <!-- <a href="#" class="boxed-btn">Place Order</a> -->
+                </div>
+                <br>
+                <div class="col-lg-4">
+                    <div class="total-section">
+                        <table class="total-table">
+                            <thead class="total-table-head">
+                                <tr class="table-total-row">
+                                    <th>Total</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="total-data">
+                                    <td><strong>Subtotal: </strong></td>
+                                    <td>₹{{subtotal}}</td>
+                                </tr>
+                                <tr class="total-data">
+                                    <td><strong>Shipping:</strong>Free Delivery</td>
+                                    <td>₹{{shipping}}</td>
+                                </tr>
+                                <tr class="total-data">
+                                    <td><strong>Total: </strong></td>
+                                    <td>₹{{subtotal+shipping}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="cart-buttons">
+                            <!-- <a class="boxed-btn black" (click)="placesorder()">Place Order</a> [disabled]="billingform.invalid" -->
+                            <button class="place-order place-order--default"  (click)="placesorder()">
+                                <div class="default text">Place Order</div>
+                                <div class="forklift">
+                                    <div class="upper"></div>
+                                    <div class="lower"></div>
+                                </div>
+                                <div class="box animation"></div>
+                                <div class="done text">Order Placed</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end check out section -->
+
+
+
+<app-about-info></app-about-info>
+<p-toast key="my_key" position="top-left"></p-toast>

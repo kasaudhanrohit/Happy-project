@@ -1,0 +1,94 @@
+<app-loader *ngIf="busy"></app-loader>
+<app-nav-bar></app-nav-bar>
+
+<!-- end breadcrumb section -->
+
+<!-- cart -->
+<div class="cart-section  loaderhome"  >
+    <div class="container" >
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center mt-50">
+                <div class="section-title">
+                    <h3><span class="orange-text">Product</span> Cart</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 30px;">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <p-table [value]="cartitemsinfo" [scrollable]="true" styleClass="p-datatable-gridlines"
+                    [tableStyle]="{ 'min-width': '62rem' }">
+                    <ng-template pTemplate="caption"> Produt Details </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Product Image</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td class="content-center"><img class="tableimg" src="{{product.productimgscr}}" alt=""></td>
+                            <td>{{product.productname}}</td>
+                            <td>{{product.price}}</td>
+                            <td>{{product.cartvalue}}</td>
+                            <td>₹{{product.cartvalue * product.discountprice}}</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                            <td [attr.colspan]="4" style="text-align: center;color: fieldtext;">
+                                No Product Added To The Cart
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="total-section">
+                    <table class="total-table">
+                        <thead class="total-table-head">
+                            <tr class="table-total-row">
+                                <th>Total</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="total-data">
+                                <td><strong>Subtotal: </strong></td>
+                                <td>₹{{subtotal}}</td>
+                            </tr>
+                            <tr class="total-data">
+                                <td ><strong>Shipping:</strong>Free Delivery</td>
+                                <td>₹{{shipping}}</td>
+                            </tr>
+                            <tr class="total-data">
+                                <td><strong>Total: </strong></td>
+                                <td>₹{{subtotal+shipping}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="cart-buttons" *ngIf="cartitemsinfo.length">
+                        <!-- <a class="boxed-btn black" (click)="opencheckout()">Check Out</a> -->
+                        <button class="checkout-btn" (click)="opencheckout()">
+                            <span class="checkout-btn__icon pi pi-shopping-cart">
+                                
+                            </span>
+                            <span class="checkout-btn__text">
+                                Checkout
+                            </span>
+                            <span class="checkout-btn__success">
+                                Thank you for your order!
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end cart -->
+
+<app-about-info></app-about-info>

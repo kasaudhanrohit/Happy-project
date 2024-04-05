@@ -1,0 +1,132 @@
+.loaderhome {
+    filter: hue-rotate(0deg);
+    background: linear-gradient(45deg, #0f8, #08f);
+    animation: hue 10000ms infinite linear;
+}
+:host ::ng-deep .p-badge {
+    background: none !important;
+}
+
+
+:host ::ng-deep .p-overlay-badge .p-badge {
+    right: 4px;
+    top: -3px;
+
+}
+
+.product-image {
+    text-align: -webkit-center;
+    padding-top: 15px;
+}
+
+.single-product-item {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.product-image img {
+    width: 50%;
+    border-radius: 5px;
+    margin-bottom: 0px;
+}
+
+p {
+    margin: 0px 0 0px 0;
+    line-height: 1.3;
+}
+
+p.product-price {
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+
+.section-title {
+    margin-bottom: 25px;
+}
+
+.single-product-item h3 {
+    font-size: 15px;
+    margin-bottom: 0px;
+}
+
+.scene {
+    background: #e8e8e8;
+    height: 230px;
+    position: relative;
+    overflow: hidden;
+}
+
+.placebutton {
+    background: #e8e8e8;
+    padding: 5px;
+}
+
+.background {
+    position: absolute;
+}
+
+.background.buildings {
+    background: url(../../assets/images/scene.jpg);
+    width: 170%;
+    height: 400px;
+    bottom: -100px;
+    animation: background-slide 5.6s infinite linear;
+}
+
+.background.clouds {
+    background: url(../../assets/images/clouds.png);
+    width: 170%;
+    height: 200px;
+    z-index: 100;
+    animation: background-slide 10.6s infinite linear;
+}
+
+@keyframes background-slide {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.truck-icon {
+    position: absolute;
+    z-index: 10;
+    top: 130px;
+    left: 50%;
+    width: 110px;
+    transform: translateX(-50%);
+    animation: moving-truck 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes moving-truck {
+    25% {
+        transform: scale(1.03) translateX(-50%);
+    }
+
+    50% {
+        transform: scale(0.98) translateX(-50%);
+    }
+
+    90% {
+        transform: scale(1.02) translateX(-50%);
+
+    }
+
+    100% {
+        transform: scale(1) translateX(-50%);
+    }
+}
+
+.road {
+    width: 300%;
+    height: 2px;
+    background: #111;
+    position: absolute;
+    top: 189px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.placebutton {
+    background: #e8e8e8;
+    padding: 5px;
+}

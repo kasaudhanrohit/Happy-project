@@ -1,0 +1,168 @@
+<app-loader *ngIf="busy"></app-loader>
+<app-nav-bar></app-nav-bar>
+<div class="product-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center mt-50">
+                <div class="section-title">
+                    <h3><span class="orange-text">Product</span>Details</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card-wrapper" *ngIf="currentproductindo">
+    <div class="card">
+        <!-- card left -->
+        <div >
+            <div class="img-display">
+                <div class="img-showcase">
+                    <img [src]="imageSrc"
+                        alt="shoe image">
+                </div>
+            </div>
+            <div class="img-select">
+                <div class="img-item">
+                    <a (click)="slideImage(currentproductindo.productimgscr)">
+                        <img src="{{currentproductindo.productimgscr}}" alt="shoe image">
+                    </a>
+                </div>
+                <div class="img-item" *ngFor="let productitem of currentproductindo?.productimgscrdetail;let j=index">
+                    <a  (click)="slideImage(productitem)">
+                        <img src="{{productitem}}"
+                            alt="shoe image">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- card right -->
+        <div class="product-content">
+            <h2 class="product-title">{{currentproductindo.productname}}</h2>
+            <div class="product-rating">
+                <i class="pi pi-star-fill"></i>
+                <i class="pi pi-star-fill"></i>
+                <i class="pi pi-star-fill"></i>
+                <i class="pi pi-star-fill"></i>
+                <span>4.7(21)</span>
+            </div>
+
+            <div class="product-price">
+                <p>M.R.P: <span><del>{{currentproductindo.price}} </del> (Inclusive of all taxes)</span></p>
+                <p>Offer Price : <span>₹{{currentproductindo.discountprice}} (Inclusive of all taxes)</span></p>
+            </div>
+
+            <div class="product-detail">
+                <h2 class="product-title">About this item: </h2>
+                <p>{{currentproductindo.description}}</p>
+                
+                <ul>
+                    <li>Available: <span>In Stock</span></li>
+                    <li>Category: <span>{{currentproductindo.producttype}}</span></li>
+                    <li>Shipping Area: <span>All Over AyodhyaDham</span></li>
+                    <li>Shipping Fee: <span>Free</span></li>
+                </ul>
+            </div>
+
+            <div class="purchase-info">
+                <a class="cart-btn" (click)="addtocartdetail(currentproductindo)"><i class="pi pi-shopping-cart" pBadge
+                        value="{{currentproductindo.cartvalue == 0 ? '' : currentproductindo.cartvalue}}"></i> Add to Cart</a>
+                <a *ngIf="currentproductindo.cartvalue !== 0" class="cart-btn" pTooltip="Remove to cart"
+                    (click)="removefromcartdtail(currentproductindo)"><i class="pi pi-caret-left"></i></a>
+                {{currentproductindo.cartvalue == 0 ? '' : currentproductindo.cartvalue}}
+                <a *ngIf="currentproductindo.cartvalue !== 0" class="cart-btn" pTooltip="Add from cart" (click)="addtocartdetail(currentproductindo)"><i
+                        class="pi pi-caret-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- more products -->
+<div class="more-products loaderhome">
+    <div class="container">
+        <div class="row" style="padding-top: 30px">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="section-title">
+                    <h3><span class="orange-text">Related</span> Products</h3>
+                    <p>We offers lots of products with exclusive offer hurry up.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6 text-center" *ngFor="let productitem of relatedproductiteminfo;let j=index">
+                <div class="single-product-item">
+                    <div class="product-image">
+                        <a (click)="moreinforelatedprod(productitem.productname)"><img src="{{productitem.productimgscr}}" alt=""></a>
+                    </div>
+                    <h3>{{productitem.productname}}</h3>
+                    <!-- <p class="product-price"><span>M.R.P: {{productitem.price}} (Inclusive of all taxes)</span> Per Kg :
+                        {{productitem.pricekg}} </p> -->
+                        <p>M.R.P: <del>{{productitem.price}} </del> (Inclusive of all taxes) </p>
+                        <p>Offer Price : <span>₹{{productitem.discountprice}} (Inclusive of all taxes)</span></p>
+                    <a class="cart-btn" (click)="moreinforelatedprod(productitem.productname)">Know More <i class="pi pi-angle-right"></i> </a>
+                    <a class="cart-btn" (click)="addtocart(productitem)"><i class="pi pi-shopping-cart"
+                            pBadge value="{{productitem.cartvalue == 0 ? '' : productitem.cartvalue}}"></i> Add to Cart</a>
+                    <a *ngIf="productitem.cartvalue !== 0" class="cart-btn" pTooltip="Remove to cart"
+                        (click)="removefromcart(productitem)"><i class="pi pi-caret-left"></i></a>
+                    {{productitem.cartvalue == 0 ? '' : productitem.cartvalue}}
+                    <a *ngIf="productitem.cartvalue !== 0" class="cart-btn" pTooltip="Add from cart"
+                        (click)="addtocart(productitem)"><i class="pi pi-caret-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end more products -->
+
+<!-- more products -->
+<div class="more-products loaderhome">
+    <div class="container">
+        <div class="row" style="padding-top: 30px">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="section-title">
+                    <h3><span class="orange-text">More</span> Products</h3>
+                    <p>We offers lots of products with exclusive offer hurry up.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6 text-center" *ngFor="let productitem of moreproductiteminfo;let j=index">
+                <div class="single-product-item">
+                    <div class="product-image">
+                        <a (click)="moreinforelatedprod(productitem.productname)"><img
+                                src="{{productitem.productimgscr}}" alt=""></a>
+                    </div>
+                    <h3>{{productitem.productname}}</h3>
+                    <!-- <p class="product-price"><span>M.R.P: {{productitem.price}} (Inclusive of all taxes)</span> Per Kg :
+                        {{productitem.pricekg}} </p> -->
+                    <p>M.R.P: <del>{{productitem.price}} </del> (Inclusive of all taxes) </p>
+                    <p>Offer Price : <span>₹{{productitem.discountprice}} (Inclusive of all taxes)</span></p>
+                    <a class="cart-btn" (click)="moreinforelatedprod(productitem.productname)">Know More <i
+                            class="pi pi-angle-right"></i> </a>
+                    <a class="cart-btn" (click)="addtocart(productitem)"><i class="pi pi-shopping-cart" pBadge
+                            value="{{productitem.cartvalue == 0 ? '' : productitem.cartvalue}}"></i> Add to Cart</a>
+                    <a *ngIf="productitem.cartvalue !== 0" class="cart-btn" pTooltip="Remove to cart"
+                        (click)="removefromcart(productitem)"><i class="pi pi-caret-left"></i></a>
+                    {{productitem.cartvalue == 0 ? '' : productitem.cartvalue}}
+                    <a *ngIf="productitem.cartvalue !== 0" class="cart-btn" pTooltip="Add from cart"
+                        (click)="addtocart(productitem)"><i class="pi pi-caret-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="placebutton" *ngIf="cartvalue  !== 0" >
+    <a class="cart-btn" (click)="placeOrder()">Place Your Order<i class="pi pi-shopping-cart" pBadge
+            style="margin-left: 5px;" value="{{cartvalue == 0 ? '' : cartvalue}}"></i></a>
+</div>
+<div class="scene">
+    <div class="background buildings"></div>
+    <div class="background clouds"></div>
+    <div class="road"></div>
+    <img class="truck-icon" src="../../assets/images/deliverytruck.svg" alt="delivery trucjk" />
+</div>
+
+<app-about-info></app-about-info>
