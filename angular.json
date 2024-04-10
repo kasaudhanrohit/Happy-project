@@ -40,7 +40,6 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "src/assets/js/main.js",
               "src/assets/js/gsap.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]

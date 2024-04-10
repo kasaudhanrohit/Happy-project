@@ -6,13 +6,17 @@ import { RouterModule } from '@angular/router';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ListboxModule } from 'primeng/listbox';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 const imports = [
   CommonModule,
   BadgeModule,
   RouterModule,
   OverlayPanelModule,
   ListboxModule,
-  AutoCompleteModule
+  AutoCompleteModule,
+  ReactiveFormsModule,
+  FormsModule
 ];
 const components = [NavBarComponent];
 

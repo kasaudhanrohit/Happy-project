@@ -42,20 +42,65 @@
                         </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link" (click)="loadgenerate()">
-                                 Load Generate
+                                  Load Generate
                             </a>
                         </li> -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" (click)="op.toggle($event)" > 
-                                <i class="pi pi-user" ></i> Username
+                            <a class="nav-link dropdown-toggle" (click)="op.toggle($event);openloginform()" > 
+                                <i class="pi pi-user" ></i> Profile
                             </a>
-                            <p-overlayPanel #op>
+                            <!-- <p-overlayPanel #op>
                                <p-listbox [options]="cities" (onChange)="selectUsermenu($event);op.hide()">
                                   <ng-template let-item pTemplate="item">
                                     <i class="{{item.icon}}" style="padding-right: 10px "></i> {{item.label}}
                                   </ng-template>
                                 </p-listbox>
-                            </p-overlayPanel>
+                            </p-overlayPanel> -->
+                            <p-overlayPanel #op>
+                                <div class="form">
+                                  <form class="login-form" [formGroup]="loginform" *ngIf="isloginform">
+                                    <i class="pi pi-user"></i>
+                                    <input type="text" formControlName="mobileno" class="user-input" placeholder="User Mobile Number" maxlength="10">
+                                    <div *ngIf="formerror" class="alert alert-danger">
+                                        <div *ngIf="loginform.get('mobileno').errors.required">Mobile Number is required.</div>
+                                        <div *ngIf="loginform.get('mobileno').errors.pattern">Mobile Number must be 10 digits long.</div>
+                                    </div>
+                                    <div style="padding-bottom: 5px;">OR</div>
+                                    <input type="text" formControlName="emailid"  class="user-input" placeholder="User Email Id">
+                                    <div *ngIf="formerror" class="alert alert-danger">
+                                        <div *ngIf="loginform.get('emailid').errors.required">Email Address is required.</div>
+                                        <div *ngIf="loginform.get('emailid').errors.pattern">Please enter a valid email address.</div>
+                                    </div>
+                                    <div class="options-01">
+                                      <label class="remember-me"><input type="checkbox">Remember me</label>
+                                      <a >Forgot your username?</a>
+                                    </div>
+                                    <input class="btn" name="" value="LOGIN" (click)="login()">
+                                    <div class="options-02">
+                                      <p>Not Registered? <a (click)="opensignform();">Create an Account</a></p>
+                                    </div>
+                                  </form>
+                                  <!--login form end-->
+                                  <!--signup form start-->
+                                  <form class="signup-form" [formGroup]="signinform" *ngIf="issigninform">
+                                    <i class="pi pi-user"></i>
+                                    <input class="user-input" type="text" formControlName="emailid" placeholder="User Email Id">
+                                    <div *ngIf="formerror" class="alert alert-danger">
+                                        <div *ngIf="signinform.get('emailid').errors.required">Email Address is required.</div>
+                                        <div *ngIf="signinform.get('emailid').errors.pattern">Please enter a valid email address.</div>
+                                    </div>
+                                    <input type="text" formControlName="mobileno" id="mobileno" class="user-input" placeholder="User Mobile Number">
+                                    <div *ngIf="formerror" class="alert alert-danger">
+                                        <div *ngIf="signinform.get('mobileno').errors.required">Mobile Number is required.</div>
+                                        <div *ngIf="signinform.get('mobileno').errors.pattern">Mobile Number must be 10 digits long.</div>
+                                    </div>
+                                    <input class="btn" name="" value="SIGN UP" (click)="adduser()">
+                                    <div class="options-02">
+                                      <p>Already Registered? <a (click)="openloginform();">Sign In</a></p>
+                                    </div>
+                                  </form> 
+                                </div>
+                             </p-overlayPanel> 
                         </li>
                     </ul>
                 </div>

@@ -3,6 +3,8 @@ import { CartItemsInfoService } from '../common-service/cart-items-info.service'
 import { SessionStateService } from '../common-service/session-state.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AllproductProductinfoService } from '../common-service/allproduct-productinfo.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -13,15 +15,21 @@ export class NavBarComponent implements OnInit {
   cartitemsinfo :any = [];
   cartvalue = 0;
   cities=[];
+  formerror = false;
+  isloginform = true;
+  issigninform = false;
   isNavbarOpen: boolean = false;
   suggestions: string[] = [];
   filteredSuggestions: string[] = [];
   producttype = [];
   allproductinfo = [];
+  loginform: FormGroup;
+  signinform: FormGroup;
   constructor(private AllproductProductinfoService:AllproductProductinfoService,private router: Router, private CartItemsInfoService: CartItemsInfoService, private SessionStateService: SessionStateService) {
     this.cartitemsinfo = [];
     this.cartitemsinfo = this.CartItemsInfoService.itemsinfoobj;
     this.allproductinfo = this.AllproductProductinfoService.allproductinfo;
+    this.setForm();
    }
 
   ngOnInit(): void {
@@ -32,8 +40,10 @@ export class NavBarComponent implements OnInit {
     this.SessionStateService.on('updatedcartinfo').subscribe(() => {
       this.getcartcount();
     });
+    this.isloginform = true;
+    this.issigninform = false;
+    this.formerror = false;
     this.cities = [
-      { label: 'Profile', value: 'Profile', icon: 'pi pi-user' },
       { label: 'My Orders', value: 'My_Orders',icon: 'pi pi-list' },
       { label: 'My Cart', value: 'My_Cart', icon: 'pi pi-shopping-cart' },
       { label: 'Logout', value: 'Logout', icon: 'pi pi-sign-out' }
@@ -47,7 +57,49 @@ export class NavBarComponent implements OnInit {
     ];
     
   }
-
+  opensignform()
+  {
+    this.isloginform = false;
+    this.issigninform = true;
+    this.formerror = false;
+  }
+  openloginform()
+  {
+    this.isloginform = true;
+    this.issigninform = false;
+    this.formerror = false;
+  }
+  login()
+  {
+   this.formerror = false;
+   if(!this.loginform.valid)
+    {
+    this.formerror = true;
+    return;
+    }
+   console.log("loginform ",this.loginform.value);
+  }
+  adduser()
+  {
+    this.formerror = false;
+    if(!this.signinform.valid)
+      {
+      this.formerror = true;
+      return;
+      }
+   console.log("signinform ",this.signinform.value);
+  }
+  setForm()
+  {
+    this.loginform = new FormGroup({
+      'mobileno': new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
+      'emailid': new FormControl('', [Validators.required, Validators.email])
+    });
+    this.signinform = new FormGroup({
+      'mobileno': new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
+      'emailid': new FormControl('', [Validators.required, Validators.email])
+    });
+  }
   filterSuggestions(event: any) {
     const query = event.query;
     this.filteredSuggestions = this.suggestions.filter(suggestion =>
