@@ -88,7 +88,6 @@ export class NavBarComponent implements OnInit {
     let loginformval =this.loginform.value;
    if((!this.loginform.valid) || (loginformval?.mobileno == '' && loginformval?.emailid == '') )
     {
-      console.log("==================" );
       this.invaliduser = true;
       return;
     }
@@ -196,7 +195,33 @@ export class NavBarComponent implements OnInit {
   }
   selectUsermenu(event: any) {
     console.log('selectUsermenu Value:', event.value);
-    if( event.value == 'Logout') {
+    let logedinuserinfo = JSON.parse(localStorage.getItem("userinfo"));
+   
+    if(event.value == 'My_Orders')
+      {
+        this.httpreq.getuserorderinfo({"username":logedinuserinfo.username}).subscribe((data )=>
+          { 
+            console.log("getuserorderinfo response : " ,data)
+            if(data && data[0] && data[0]['status'] == "success")
+              {
+                console.log("data[0][data] ",data[0]['data']);
+              }
+          });
+      }
+
+      else if(event.value == 'My_Cart')
+        {
+          this.httpreq.getusercartinfo(logedinuserinfo.username).subscribe((data )=>
+            { 
+              console.log("getuserorderinfo response : " ,data)
+              if(data && data[0] && data[0]['status'] == "success")
+                {
+                  console.log("data[0][data] ",data[0]['data']);
+                }
+            });
+        }
+
+     else if( event.value == 'Logout') {
       localStorage.clear();
       this.opanneluserflag = false;
       this.logedinuserinfo = {"username" : "", "mobileno":"","emailid":""};

@@ -34,6 +34,25 @@ export class HttprequestService {
     return this.http.post<any>(`${this.apiUrl}/createuserinfodata`, item,{ headers});
   }
   
+  
+  // POST request
+  adduserorderinfo(item: any): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(`${this.apiUrl}/adduserorderinfo`, item,{ headers});
+  }
+
+   // POST request
+   getuserorderinfo(item: any): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(`${this.apiUrl}/getuserorderinfo`, item,{ headers});
+  }
+
+  getusercartinfo(item: any): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(`${this.apiUrl}/getusercartinfo`, item,{ headers});
+  }
+
+
   // POST request
   placedordermail(item: any): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');

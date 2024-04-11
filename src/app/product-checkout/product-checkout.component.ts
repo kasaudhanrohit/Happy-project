@@ -110,15 +110,27 @@ export class ProductCheckoutComponent implements OnInit {
     orderinfo["billingform"] = this.billingform.value;
     orderinfo["shippingform"] = this.shippingform.value;
     let cartitem = JSON.parse(JSON.stringify(this.cartitemsinfo));
-    let obj = cartitem.map((val) => { return { 'cartvalue': val.cartvalue, 'productname': val.productname, 'producttype': val.producttype, 'price': val.price, 'discountprice': val.discountprice } })
+    let logedinuserinfo = JSON.parse(localStorage.getItem("userinfo"));
+    let orderid = logedinuserinfo.username+"_"+ new Date().getTime();
+    let obj = cartitem.map((val) => { return{ 'orderid':orderid,'quantity': val.cartvalue, 'productname': val.productname, 'producttype': val.producttype,'productimgsrc':val.productimgscr, 'price': val.price, 'discountprice': val.discountprice,'total': (val.cartvalue * val.discountprice),'status':'in progress' } })
     orderinfo["cartitemsinfo"] = obj;
-    
     console.log("Placed Ordered orderinfo : ", orderinfo);
     //need to send orderinfo to backend
     const btn = document.querySelector(".place-order");
     btn.classList.remove("place-order--done");
     btn.classList.remove("place-order--default");
     btn.classList.add("place-order--placing");
+
+
+    
+    let userorderinfo = {'username':logedinuserinfo.username,"cartitemsinfo":obj};
+    this.httpreqService.adduserorderinfo(userorderinfo).subscribe(
+      (data: any) => {
+        console.log(" userorderinforeq data ",data);
+
+      });
+
+
     this.httpreqService.placedordermail(orderinfo).subscribe(
       (data: any) => {
 
