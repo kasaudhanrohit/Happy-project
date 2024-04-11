@@ -11,7 +11,6 @@ import { AccordionModule } from 'primeng/accordion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
 const routes: Routes = [
   { path: '', component: ProductCheckoutComponent }
 ];
@@ -37,6 +36,5 @@ const components = [ProductCheckoutComponent];
   imports: [
     imports, RouterModule.forChild(routes)
   ],
-  providers: [MessageService],
 })
 export class ProductCheckoutModule { }

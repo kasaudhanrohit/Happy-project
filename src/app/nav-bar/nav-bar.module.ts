@@ -7,7 +7,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ListboxModule } from 'primeng/listbox';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { ToastModule } from 'primeng/toast';
 const imports = [
   CommonModule,
   BadgeModule,
@@ -16,7 +16,8 @@ const imports = [
   ListboxModule,
   AutoCompleteModule,
   ReactiveFormsModule,
-  FormsModule
+  FormsModule,
+  ToastModule
 ];
 const components = [NavBarComponent];
 

@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation ,ViewChild} from '@angular/core';
 import { CartItemsInfoService } from '../common-service/cart-items-info.service';
 import { SessionStateService } from '../common-service/session-state.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AllproductProductinfoService } from '../common-service/allproduct-productinfo.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { HttprequestService } from '../common-service/httprequest.service';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -12,10 +13,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   encapsulation: ViewEncapsulation.None,
 })
 export class NavBarComponent implements OnInit {
+  @ViewChild('opannellogin') opannellogin;
+  opanneluserflag = false;
   cartitemsinfo :any = [];
   cartvalue = 0;
+  invaliduser = false;
   cities=[];
-  formerror = false;
   isloginform = true;
   issigninform = false;
   isNavbarOpen: boolean = false;
@@ -25,7 +28,12 @@ export class NavBarComponent implements OnInit {
   allproductinfo = [];
   loginform: FormGroup;
   signinform: FormGroup;
-  constructor(private AllproductProductinfoService:AllproductProductinfoService,private router: Router, private CartItemsInfoService: CartItemsInfoService, private SessionStateService: SessionStateService) {
+  mobileflag = false;
+  emailflag=false;
+  usernameflag = false;
+  existinguserflag = false;
+  logedinuserinfo = {"username" : "","mobileno":"","emailid":""};
+  constructor(private messageService: MessageService,private httpreq : HttprequestService ,private AllproductProductinfoService:AllproductProductinfoService,private router: Router, private CartItemsInfoService: CartItemsInfoService, private SessionStateService: SessionStateService) {
     this.cartitemsinfo = [];
     this.cartitemsinfo = this.CartItemsInfoService.itemsinfoobj;
     this.allproductinfo = this.AllproductProductinfoService.allproductinfo;
@@ -34,6 +42,12 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartitemsinfo = [];
+    this.opanneluserflag = false;
+    if(localStorage.getItem("userinfo"))
+      {
+        this.opanneluserflag = true;
+        this.logedinuserinfo = JSON.parse(localStorage.getItem("userinfo"));
+      }
     this.cartitemsinfo = this.CartItemsInfoService.itemsinfoobj;
     this.suggestions = this.allproductinfo.map(val => val.productname);
     this.getcartcount();
@@ -42,11 +56,11 @@ export class NavBarComponent implements OnInit {
     });
     this.isloginform = true;
     this.issigninform = false;
-    this.formerror = false;
+    this.invaliduser = false;
     this.cities = [
       { label: 'My Orders', value: 'My_Orders',icon: 'pi pi-list' },
       { label: 'My Cart', value: 'My_Cart', icon: 'pi pi-shopping-cart' },
-      { label: 'Logout', value: 'Logout', icon: 'pi pi-sign-out' }
+      { label: 'Logout', value: 'Logout', icon: 'pi pi-sign-out'}
     ];
     this.producttype = [
       { label: 'Flour', value: 'flour', icon: 'pi pi-user' },
@@ -61,41 +75,100 @@ export class NavBarComponent implements OnInit {
   {
     this.isloginform = false;
     this.issigninform = true;
-    this.formerror = false;
   }
   openloginform()
   {
     this.isloginform = true;
     this.issigninform = false;
-    this.formerror = false;
   }
+  
   login()
   {
-   this.formerror = false;
-   if(!this.loginform.valid)
+    this.invaliduser =false;
+    let loginformval =this.loginform.value;
+   if((!this.loginform.valid) || (loginformval?.mobileno == '' && loginformval?.emailid == '') )
     {
-    this.formerror = true;
-    return;
+      console.log("==================" );
+      this.invaliduser = true;
+      return;
+    }
+    else
+    {
+      this.httpreq.loginuserinfodata(this.loginform.value).subscribe((data)=>
+        {
+           console.log("createuserinfodata response : " ,data);
+           if(data && data[0] && data[0]['status'] == "success")
+            {
+              localStorage.setItem("userinfo",JSON.stringify(data[0]));
+              this.invaliduser = false;
+              this.opannellogin.hide();
+              this.opanneluserflag = true;
+              this.logedinuserinfo = JSON.parse(localStorage.getItem("userinfo"));
+              this.setForm();
+            }
+            else
+            {
+              this.invaliduser = true;
+            }
+        });
+
     }
    console.log("loginform ",this.loginform.value);
   }
+
+
   adduser()
   {
-    this.formerror = false;
-    if(!this.signinform.valid)
+    this.invaliduser =false;
+    let signinformval =this.signinform.value;
+    if((!this.signinform.valid) || (signinformval?.username && signinformval?.mobileno == '' && signinformval?.emailid == '') )
       {
-      this.formerror = true;
-      return;
+        console.log("==================" );
+        this.invaliduser = true;
+        return;
+      }
+      else
+      {
+        this.httpreq.checkexistinguser(this.signinform.value).subscribe((data )=>{
+          if(data && data[0] && data[0]['status'] == "fail")
+            {
+              this.existinguserflag =true;
+              return;
+            }
+            else
+            {
+              this.httpreq.createuserinfodata(this.signinform.value).subscribe((data )=>
+                { 
+                  console.log("createuserinfodata response : " ,data)
+                  if(data && data[0] && data[0]['status'] == "success")
+                    {
+                      this.isloginform = true;
+                      this.issigninform = false;
+                      this.invaliduser = false;
+                      this.setForm();
+                    }
+                    else
+                    {
+                      this.invaliduser = true;
+                    }
+                });
+            }
+        });
+
+        
+
+
       }
    console.log("signinform ",this.signinform.value);
   }
   setForm()
   {
     this.loginform = new FormGroup({
-      'mobileno': new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
-      'emailid': new FormControl('', [Validators.required, Validators.email])
+      'mobileno': new FormControl('', [ Validators.pattern(/^\d{10}$/)]),
+      'emailid': new FormControl('', [ Validators.email])
     });
     this.signinform = new FormGroup({
+      'username': new FormControl('', [Validators.required]),
       'mobileno': new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
       'emailid': new FormControl('', [Validators.required, Validators.email])
     });
@@ -123,6 +196,12 @@ export class NavBarComponent implements OnInit {
   }
   selectUsermenu(event: any) {
     console.log('selectUsermenu Value:', event.value);
+    if( event.value == 'Logout') {
+      localStorage.clear();
+      this.opanneluserflag = false;
+      this.logedinuserinfo = {"username" : "", "mobileno":"","emailid":""};
+      this.messageService.add({ key: 'nav_key', severity: 'success', summary: 'Success', detail: "user Logout Successfull!" });
+     } 
   }
   toggleNavbar() {
     this.isNavbarOpen = !this.isNavbarOpen;

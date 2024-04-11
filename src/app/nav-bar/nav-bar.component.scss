@@ -104,7 +104,7 @@ width: 100%;
   }
   
   .form .options-01 {
-    margin-bottom: 35px;
+    margin-bottom: 25px;
   }
   
   .form .options-01 input {
@@ -124,9 +124,10 @@ width: 100%;
   
   .form .options-01 a {
     color: #4285f4;
-    font-size: 14px;
+    font-size: 12px;
     font-style: italic;
     float: right;
+    padding-bottom: 5px;
   }
   
   .form .btn {
@@ -153,11 +154,12 @@ width: 100%;
   .form .options-02 {
     color: #bbb;
     font-size: 14px;
-    margin-top: 15px;
+    margin-top: 10px;
   }
   
   .form .options-02 a {
     color: #4285f4;
+    font-size: 13px;
   }
   .b-btn {
     color: white;
@@ -191,4 +193,9 @@ width: 100%;
     .form .btn {
       width: 100%;
     }
+  }
+
+  .alertpadding
+  {
+    padding: 5px;
   }
