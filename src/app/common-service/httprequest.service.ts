@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HttprequestService {
-  //private apiUrl = 'https://fine-gold-hedgehog-veil.cyclic.app/api';
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'https://fine-gold-hedgehog-veil.cyclic.app/api';
+  //private apiUrl = 'http://localhost:3000/api';
   constructor(private http: HttpClient) { }
 
   // GET request
@@ -37,17 +37,44 @@ export class HttprequestService {
   
   // POST request
   adduserorderinfo(item: any): Observable<any> {
+    if(item.username && item.username == 'guest')
+      return ;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<any>(`${this.apiUrl}/adduserorderinfo`, item,{ headers});
   }
 
    // POST request
    getuserorderinfo(item: any): Observable<any> {
+    if(item.username && item.username == 'guest')
+      return ;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<any>(`${this.apiUrl}/getuserorderinfo`, item,{ headers});
   }
 
+  addusercartinfo(item: any): Observable<any> {
+    if(item.username && item.username == 'guest')
+      return ;
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(`${this.apiUrl}/addusercartinfo`, item,{ headers});
+  }
+
+  deleteusercartinfo(item: any): Observable<any> {
+    if(item.username && item.username == 'guest')
+      return ;
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(`${this.apiUrl}/deleteusercartinfo`, item,{ headers});
+  }
+  updateusercartinfo(item: any): Observable<any> {
+    if(item.username && item.username == 'guest')
+      return ;
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(`${this.apiUrl}/updateusercartinfo`, item,{ headers});
+  }
+
+
   getusercartinfo(item: any): Observable<any> {
+    if(item.username && item.username == 'guest')
+      return ;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<any>(`${this.apiUrl}/getusercartinfo`, item,{ headers});
   }

@@ -46,7 +46,7 @@ export class NavBarComponent implements OnInit {
     if(localStorage.getItem("userinfo"))
       {
         this.opanneluserflag = true;
-        this.logedinuserinfo = JSON.parse(localStorage.getItem("userinfo"));
+        this.logedinuserinfo = JSON.parse(localStorage.getItem("userinfo") || '{"username":"guest","mobileno":"","emailid":""}');
       }
     this.cartitemsinfo = this.CartItemsInfoService.itemsinfoobj;
     this.suggestions = this.allproductinfo.map(val => val.productname);
@@ -102,7 +102,7 @@ export class NavBarComponent implements OnInit {
               this.invaliduser = false;
               this.opannellogin.hide();
               this.opanneluserflag = true;
-              this.logedinuserinfo = JSON.parse(localStorage.getItem("userinfo"));
+              this.logedinuserinfo = JSON.parse(localStorage.getItem("userinfo") || '{"username":"guest","mobileno":"","emailid":""}');
               this.setForm();
             }
             else
@@ -195,30 +195,17 @@ export class NavBarComponent implements OnInit {
   }
   selectUsermenu(event: any) {
     console.log('selectUsermenu Value:', event.value);
-    let logedinuserinfo = JSON.parse(localStorage.getItem("userinfo"));
+    
    
     if(event.value == 'My_Orders')
       {
-        this.httpreq.getuserorderinfo({"username":logedinuserinfo.username}).subscribe((data )=>
-          { 
-            console.log("getuserorderinfo response : " ,data)
-            if(data && data[0] && data[0]['status'] == "success")
-              {
-                console.log("data[0][data] ",data[0]['data']);
-              }
-          });
+        this.router.navigate(['/myorder'], { replaceUrl: true });
       }
 
       else if(event.value == 'My_Cart')
         {
-          this.httpreq.getusercartinfo(logedinuserinfo.username).subscribe((data )=>
-            { 
-              console.log("getuserorderinfo response : " ,data)
-              if(data && data[0] && data[0]['status'] == "success")
-                {
-                  console.log("data[0][data] ",data[0]['data']);
-                }
-            });
+          this.router.navigate(['/mycart'], {  replaceUrl: true });
+          
         }
 
      else if( event.value == 'Logout') {

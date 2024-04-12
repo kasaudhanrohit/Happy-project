@@ -1686,6 +1686,7 @@ p.product-price span {
 }
 
 a.cart-btn {
+  text-decoration: none;
   font-family: 'Poppins', sans-serif;
   display: inline-block;
   /*background-color: #F28123;*/

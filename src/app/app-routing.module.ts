@@ -9,6 +9,8 @@ const routes: Routes = [
   { path: 'gallary', loadChildren: () => import('./gallary/gallary.module').then(m => m.GallaryModule) },
   { path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
   { path: 'contact', loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule) },
+  { path: 'mycart', loadChildren: () => import('./my-cart/my-cart.module').then(m => m.MyCartModule) },
+  { path: 'myorder', loadChildren: () => import('./my-order/my-order.module').then(m => m.MyOrderModule) },
   { path: 'about-info', loadChildren: () => import('./about-info/about-info.module').then(m => m.AboutInfoModule) },
   { path: 'adminuserinfo', loadChildren: () => import('./admin-userinfo/admin-userinfo.module').then(m => m.AdminUserinfoModule) },
   { path: '', redirectTo: 'home', pathMatch: 'full' },

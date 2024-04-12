@@ -97,7 +97,7 @@
                                         <div *ngIf="signinform.controls['emailid'].hasError('required')" class="alert alert-danger">Email Address is required.</div>
                                         <div *ngIf="signinform.controls['emailid'].hasError('email')" class="alert alert-danger">Please enter a valid email address.</div>
                                     </div>
-                                    <input type="text" formControlName="mobileno" id="mobileno" (click)="mobileflag=true;emailflag=false;usernameflag =false" class="user-input" placeholder="User Mobile Number">
+                                    <input type="text" formControlName="mobileno" id="mobileno" (click)="mobileflag=true;emailflag=false;usernameflag =false" class="user-input" placeholder="User Mobile Number" maxlength="10">
                                     <div *ngIf="mobileflag" >
                                         <div *ngIf="signinform.controls['mobileno'].hasError('required')" class="alert alert-danger">Mobile Number is required.</div>
                                         <div *ngIf="signinform.controls['mobileno'].hasError('pattern')" class="alert alert-danger">Mobile Number must be 10 digits long.</div>

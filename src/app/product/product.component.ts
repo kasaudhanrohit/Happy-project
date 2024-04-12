@@ -9,6 +9,7 @@ import { AllproductProductinfoService } from '../common-service/allproduct-produ
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SessionStateService } from '../common-service/session-state.service';
 import { CartItemsInfoService } from '../common-service/cart-items-info.service';
+import { HttprequestService } from '../common-service/httprequest.service';
 
 @Component({
   selector: 'app-product',
@@ -21,7 +22,7 @@ export class ProductComponent implements OnInit {
   allproductinfo = [];
   finalproductinfo = [];
   cartitemsinfo: any = [];
-  constructor(private cartitemsinfoservice: CartItemsInfoService, private SessionStateService: SessionStateService,private route: ActivatedRoute, private router:Router,private AllproductProductinfoService: AllproductProductinfoService) {
+  constructor(private httpreq : HttprequestService,private cartitemsinfoservice: CartItemsInfoService, private SessionStateService: SessionStateService,private route: ActivatedRoute, private router:Router,private AllproductProductinfoService: AllproductProductinfoService) {
     this.allproductinfo = this.AllproductProductinfoService.allproductinfo;
    }
 
@@ -66,14 +67,69 @@ export class ProductComponent implements OnInit {
     if (productitem.cartvalue == 0)
       return;
     productitem.cartvalue = productitem.cartvalue - 1;
+    let logedinuserinfo = JSON.parse(localStorage.getItem("userinfo") || '{"username":"guest","mobileno":"","emailid":""}');
+    if(productitem.cartvalue == 0 )
+      {
+         this.httpreq.deleteusercartinfo({"username":logedinuserinfo.username,"carditemid":productitem.carditemid}).subscribe((data )=>
+         { 
+           console.log("getuserorderinfo response : " ,data)
+           if(data && data[0] && data[0]['status'] == "success")
+             {
+               console.log("data[0][data] ",data[0]['data']);
+             }
+         });
+      }
+      else
+      {  
+        if(productitem.carditemid)
+          {
+            //update mycart value in db
+            let logedinuserinfo = JSON.parse(localStorage.getItem("userinfo") || '{"username":"guest","mobileno":"","emailid":""}');
+            let userorderinfo = {'username':logedinuserinfo.username,"carditemid":productitem.carditemid,"quantity":productitem.cartvalue,"total": (productitem.cartvalue * productitem.discountprice)};
+             this.httpreq.updateusercartinfo(userorderinfo).subscribe(
+             (data: any) => {
+              console.log(" userorderinforeq data ",data);
+             });
+          } 
+      }
+    
     this.SessionStateService.set('updatedcartinfo', null, true);
   }
   addtocart(productitem) {
     productitem.cartvalue = productitem.cartvalue + 1;
+    if(productitem.carditemid)
+      {
+        //update mycart value in db
+        let logedinuserinfo = JSON.parse(localStorage.getItem("userinfo") || '{"username":"guest","mobileno":"","emailid":""}');
+        let userorderinfo = {'username':logedinuserinfo.username,"carditemid":productitem.carditemid,"quantity":productitem.cartvalue,"total": (productitem.cartvalue * productitem.discountprice)};
+         this.httpreq.updateusercartinfo(userorderinfo).subscribe(
+         (data: any) => {
+          console.log(" userorderinforeq data ",data);
+         });
+      }
     if (this.cartitemsinfo.length == 0)
-      this.cartitemsinfo.push(productitem);
+      {
+       let logedinuserinfo = JSON.parse(localStorage.getItem("userinfo") || '{"username":"guest","mobileno":"","emailid":""}');
+       productitem["carditemid"] = logedinuserinfo.username+"_"+ new Date().getTime();
+       this.cartitemsinfo.push(productitem); 
+       let obj = [{ 'carditemid':productitem.carditemid,'quantity': productitem.cartvalue, 'productname': productitem.productname, 'producttype': productitem.producttype,'productimgsrc':productitem.productimgscr, 'price': productitem.price, 'discountprice': productitem.discountprice,'total': (productitem.cartvalue * productitem.discountprice)}];
+       let userorderinfo = {'username':logedinuserinfo.username,"cartitemsinfo":obj};
+       this.httpreq.addusercartinfo(userorderinfo).subscribe(
+       (data: any) => {
+        console.log(" userorderinforeq data ",data);
+       });
+      }
     else if (!this.cartitemsinfo.some(item => item.productname === productitem.productname)) {
+      let logedinuserinfo = JSON.parse(localStorage.getItem("userinfo") || '{"username":"guest","mobileno":"","emailid":""}');
+      productitem["carditemid"] = logedinuserinfo.username+"_"+ new Date().getTime();
       this.cartitemsinfo.push(productitem);
+      let obj = [{ 'carditemid':productitem.carditemid,'quantity': productitem.cartvalue, 'productname': productitem.productname, 'producttype': productitem.producttype,'productimgsrc':productitem.productimgscr, 'price': productitem.price, 'discountprice': productitem.discountprice,'total': (productitem.cartvalue * productitem.discountprice)}];
+      let userorderinfo = {'username':logedinuserinfo.username,"cartitemsinfo":obj};
+      this.httpreq.addusercartinfo(userorderinfo).subscribe(
+      (data: any) => {
+        console.log(" userorderinforeq data ",data);
+      });
+
     }
     //console.log("this.cartitemsinfoservice.itemsinfoobj ", this.cartitemsinfoservice.itemsinfoobj);
     this.SessionStateService.set('updatedcartinfo', null, true);
