@@ -221,6 +221,7 @@ export class NavBarComponent implements OnInit {
       this.opanneluserflag = false;
       this.logedinuserinfo = {"username" : "", "mobileno":"","emailid":""};
       this.messageService.add({ key: 'nav_key', severity: 'success', summary: 'Success', detail: "user Logout Successfull!" });
+      this.router.navigate(['/home'], { replaceUrl: true });
      } 
   }
   toggleNavbar() {

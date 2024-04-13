@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HttprequestService {
-  private apiUrl = 'https://fine-gold-hedgehog-veil.cyclic.app/api';
-  //private apiUrl = 'http://localhost:3000/api';
+  //private apiUrl = 'https://fine-gold-hedgehog-veil.cyclic.app/api';
+  private apiUrl = 'http://localhost:3000/api';
   constructor(private http: HttpClient) { }
 
   // GET request
