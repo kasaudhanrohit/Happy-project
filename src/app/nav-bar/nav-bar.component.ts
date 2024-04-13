@@ -14,6 +14,8 @@ import { MessageService } from 'primeng/api';
 })
 export class NavBarComponent implements OnInit {
   @ViewChild('opannellogin') opannellogin;
+  @ViewChild('opanneluser')  opanneluser;
+  display = false;
   opanneluserflag = false;
   cartitemsinfo :any = [];
   cartvalue = 0;
@@ -82,6 +84,12 @@ export class NavBarComponent implements OnInit {
     this.issigninform = false;
   }
   
+
+  usermenu(event)
+  {
+    this.opanneluser.toggle(event);
+    this.display = false;
+  }
   login()
   {
     this.invaliduser =false;

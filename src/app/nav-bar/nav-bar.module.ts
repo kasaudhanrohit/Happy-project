@@ -8,7 +8,10 @@ import { ListboxModule } from 'primeng/listbox';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
+import {SidebarModule} from 'primeng/sidebar';
+
 const imports = [
+  SidebarModule,
   CommonModule,
   BadgeModule,
   RouterModule,

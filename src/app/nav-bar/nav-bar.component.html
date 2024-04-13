@@ -46,7 +46,7 @@
                             </a>
                         </li> -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" (click)="opanneluserflag ? opanneluser.toggle($event):opannellogin.toggle($event);openloginform()" > 
+                            <a class="nav-link dropdown-toggle" (click)="opanneluserflag ? usermenu($event):display = true;openloginform()"> 
                                 <i class="pi pi-user" ></i> {{logedinuserinfo['username'] != "" ? logedinuserinfo['username'] : 'Profile'}}
                             </a>
                             <p-overlayPanel #opanneluser>
@@ -56,7 +56,69 @@
                                   </ng-template>
                                 </p-listbox>
                             </p-overlayPanel>
-                            <p-overlayPanel #opannellogin>
+                          
+                            <p-sidebar [(visible)]="display" position="right" [style]="{top:'50px',height:'370px'}" [baseZIndex]="10000">
+                                <div class="form">
+                                    <form class="login-form" [formGroup]="loginform" *ngIf="isloginform">
+                                      <i class="pi pi-user"></i>
+                                      <br>
+                                      <input type="text" formControlName="mobileno" class="user-input" (click)="mobileflag=true;emailflag=false;" placeholder="User Mobile Number" maxlength="10">
+                                      <div *ngIf="mobileflag" >
+                                          <div *ngIf="loginform.controls['mobileno'].hasError('pattern')" class="alert alert-danger">Mobile Number must be 10 digits long.</div>
+                                      </div>
+                                      <div style="padding-bottom: 5px;">OR</div>
+                                      <input type="text" formControlName="emailid" (click)="mobileflag=false;emailflag=true;" class="user-input" placeholder="User Email Id">
+                                      <div *ngIf="emailflag">
+                                          <div *ngIf="loginform.controls['emailid'].hasError('email')"  class="alert alert-danger">Please enter a valid email address.</div>
+                                      </div>
+                                      <div class="options-01">
+                                        <label class="remember-me"><input type="checkbox">Remember me</label>
+                                        <br>
+                                        <a >Forgot your username?</a>
+                                      </div>
+                                      <input class="btn" name="" value="LOGIN" (click)="login()">
+                                      <div *ngIf="invaliduser" class="alertpadding">
+                                          <div  class="alert alert-danger alertpadding">Invalid User,Please Register User</div>
+                                      </div>
+                                      <div class="options-02">
+                                        <p>Not Registered? <a (click)="opensignform();invaliduser =false;mobileflag=false;emailflag=false;existinguserflag =false;">Create an Account</a></p>
+                                      </div>
+                                    </form>
+                                    <!--login form end-->
+                                    <!--signup form start-->
+                                    <form class="signup-form" [formGroup]="signinform" *ngIf="issigninform">
+                                      <i class="pi pi-user"></i>
+                                      <br>
+                                      <input class="user-input" type="text" formControlName="username" (click)="usernameflag =true;mobileflag=false;emailflag=false;" placeholder="User Name">
+                                      <div *ngIf="usernameflag">
+                                          <div *ngIf="signinform.controls['username'].hasError('required')" class="alert alert-danger">Username is required.</div>
+                                      </div>
+                                      <input class="user-input" type="text" formControlName="emailid" (click)="mobileflag=false;emailflag=true;usernameflag =false" placeholder="User Email Id">
+                                      <div *ngIf="emailflag">
+                                          <div *ngIf="signinform.controls['emailid'].hasError('required')" class="alert alert-danger">Email Address is required.</div>
+                                          <div *ngIf="signinform.controls['emailid'].hasError('email')" class="alert alert-danger">Please enter a valid email address.</div>
+                                      </div>
+                                      <input type="text" formControlName="mobileno" id="mobileno" (click)="mobileflag=true;emailflag=false;usernameflag =false" class="user-input" placeholder="User Mobile Number" maxlength="10">
+                                      <div *ngIf="mobileflag" >
+                                          <div *ngIf="signinform.controls['mobileno'].hasError('required')" class="alert alert-danger">Mobile Number is required.</div>
+                                          <div *ngIf="signinform.controls['mobileno'].hasError('pattern')" class="alert alert-danger">Mobile Number must be 10 digits long.</div>
+                                      </div>
+                                      <input class="btn" name="" value="SIGN UP" (click)="adduser()">
+                                      <div *ngIf="invaliduser" class="alertpadding">
+                                          <div  class="alert alert-danger alertpadding">Something Went Wrong Please Try Again</div>
+                                      </div>
+                                      <div *ngIf="existinguserflag">
+                                          <div  class="alert alert-danger">User Already Exists</div>
+                                      </div>
+                                      <div class="options-02">
+                                        <p>Already Registered? <a (click)="openloginform();">Sign In</a></p>
+                                      </div>
+                                    </form> 
+                                  </div>   
+                            </p-sidebar>
+
+                            
+                            <!-- <p-overlayPanel #opannellogin>
                                 <div class="form">
                                   <form class="login-form" [formGroup]="loginform" *ngIf="isloginform">
                                     <i class="pi pi-user"></i>
@@ -83,8 +145,6 @@
                                       <p>Not Registered? <a (click)="opensignform();invaliduser =false;mobileflag=false;emailflag=false;existinguserflag =false;">Create an Account</a></p>
                                     </div>
                                   </form>
-                                  <!--login form end-->
-                                  <!--signup form start-->
                                   <form class="signup-form" [formGroup]="signinform" *ngIf="issigninform">
                                     <i class="pi pi-user"></i>
                                     <br>
@@ -114,7 +174,7 @@
                                     </div>
                                   </form> 
                                 </div>
-                             </p-overlayPanel> 
+                             </p-overlayPanel>  -->
                         </li>
                     </ul>
                 </div>
