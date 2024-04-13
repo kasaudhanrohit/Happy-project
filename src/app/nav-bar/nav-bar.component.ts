@@ -108,7 +108,7 @@ export class NavBarComponent implements OnInit {
             {
               localStorage.setItem("userinfo",JSON.stringify(data[0]));
               this.invaliduser = false;
-              this.opannellogin.hide();
+              this.display = false;
               this.opanneluserflag = true;
               this.logedinuserinfo = JSON.parse(localStorage.getItem("userinfo") || '{"username":"guest","mobileno":"","emailid":""}');
               this.setForm();

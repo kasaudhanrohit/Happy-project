@@ -5,11 +5,14 @@ import { LoaderModule } from '../loader/loader.module';
 import { NavBarModule } from '../nav-bar/nav-bar.module';
 import { RouterModule, Routes } from '@angular/router';
 import { MyOrderComponent } from './my-order.component';
+import {TableModule} from 'primeng/table';
+
 const routes: Routes = [
   { path: '', component: MyOrderComponent }
 ];
 
 const imports = [
+  TableModule,
   CommonModule,
   AboutInfoModule,
   LoaderModule,
