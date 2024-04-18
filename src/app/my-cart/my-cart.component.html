@@ -11,5 +11,57 @@
         </div>
     </div>
 </div>
+<p-table #dt [value]="myorderdata" styleClass="p-datatable-customers">
+    <!-- <ng-template pTemplate="caption">
+        <div class="table-header">
+            My Orders
+        </div>
+    </ng-template> -->
+    <ng-template pTemplate="body" let-myorderitem>
+        <tr class="p-selectable-row">
+            <td colspan="8">     
+                <div class="container">
+                  <div class="customer_details">      
+                                <div class="orderCard">
+                                  <div class="orderHead">
+                                    <ul class="orderLeft">                 
+                                      <li>
+                                        <p>ShipTo<span class="customerName">Customer Name</span>
+                                        </p>
+                                      </li>
+                                      <li>
+                                        <p>CartId <span class="customerName">{{myorderitem.carditemid}}</span>
+                                        </p>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                  <div class="itemDetails">
+                                    <div class="itemInfo">
+                                      <div class="itemImg">
+                                        <img src="{{myorderitem.productimgsrc}}" alt="">
+                                      </div>
+                                      <div class="itemDesc">
+                                        <h4 (click)="openproductdetail( myorderitem.productname)">{{ myorderitem.productname}}</h4>
+                                        <p class="pspan">Sold by: <span class="pspan">AyodhyaWasi Apna Store</span></p>
+                                        <span class="pspan" style="display: flex;">MRP: <span class="pspan"><del>{{myorderitem.price}}</del> (Inclusive of all taxes)</span></span>
+                                        <span class="pspan" style="display: flex;">Sell MRP: <span class="pspan">₹{{myorderitem.discountprice}} (Inclusive of all taxes)</span></span>
+                                      </div>
+                                    </div>
 
+                                  </div>
+                                </div>
+                            
+                             </div>
+                            </div>
+              </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">     
+                No customers found.
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
 <app-about-info></app-about-info>

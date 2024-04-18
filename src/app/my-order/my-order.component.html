@@ -60,8 +60,8 @@
                                               <div class="itemDesc">
                                                 <h4 (click)="openproductdetail( myorderitem.productname)">{{ myorderitem.productname}}</h4>
                                                 <p class="pspan">Sold by: <span class="pspan">AyodhyaWasi Apna Store</span></p>
-                                                <span class="pspan" style="display: flex;">M.R.P: <span class="pspan"><del>{{myorderitem.price}} </del> (Inclusive of all taxes)</span></span>
-                                                <span class="pspan" style="display: flex;">Offer Price : <span class="pspan">₹{{myorderitem.discountprice}} (Inclusive of all taxes)</span></span>
+                                                <span class="pspan" style="display: flex;">MRP: <span class="pspan"><del>{{myorderitem.price}} </del> (Inclusive of all taxes)</span></span>
+                                                <span class="pspan" style="display: flex;">Sell MRP: <span class="pspan">₹{{myorderitem.discountprice}} (Inclusive of all taxes)</span></span>
                                                 <button class="buy_again">Buy it again</button>
                                               </div>
                                             </div>
@@ -81,6 +81,6 @@
                     </td>
                 </tr>
             </ng-template>
-        </p-table>
+    </p-table>
 </div>
 <app-about-info></app-about-info>
