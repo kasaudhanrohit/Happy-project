@@ -97,7 +97,7 @@ export class ProductCartComponent implements OnInit {
       setTimeout(() => {
         checkoutTL.restart();
         checkoutTL.pause();
-        this.router.navigate(['/product-checkout'], { replaceUrl: true })
+        this.router.navigate(['/product-checkout'])
       }, 2000);
     });
     //this.router.navigate(['/product-checkout'], { replaceUrl: true });

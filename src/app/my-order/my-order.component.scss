@@ -45,7 +45,17 @@
     .itemImg img {
         aspect-ratio: .5 !important;
       }
+      .invoiceDetails {
+        width: 52% !important;
+    }
+    .orderCard .orderLeft {
+        width: 45% !important;
+    }
+    .pspan{
+        font-size: 13px !important; 
+    }
   }
+  
 
 .orderLeft li .customerName {
     color: #28479c !important;
@@ -152,6 +162,7 @@
 .itemDesc h4 {
     font-size: 16px;
     color: #28479c;
+    cursor: pointer;
 }
 .buy_again {
     display: block;

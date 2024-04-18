@@ -12,9 +12,7 @@
     </div>
 </div>
 <div>
-    <p-table #dt [value]="myorderdata" styleClass="p-datatable-customers"
-            [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
-            [paginator]="true">
+    <p-table #dt [value]="myorderdata" styleClass="p-datatable-customers">
             <!-- <ng-template pTemplate="caption">
                 <div class="table-header">
                     My Orders
@@ -60,10 +58,10 @@
                                                 <img src="{{myorderitem.productimgsrc}}" alt="">
                                               </div>
                                               <div class="itemDesc">
-                                                <h4>{{ myorderitem.productname}}</h4>
-                                                <p>Sold by: <span>AyodhyaWasi Apna Store</span></p>
-                                                <span style="display: flex;">M.R.P: <span><del>{{myorderitem.price}} </del> (Inclusive of all taxes)</span></span>
-                                                <span style="display: flex;">Offer Price : <span>₹{{myorderitem.discountprice}} (Inclusive of all taxes)</span></span>
+                                                <h4 (click)="openproductdetail( myorderitem.productname)">{{ myorderitem.productname}}</h4>
+                                                <p class="pspan">Sold by: <span class="pspan">AyodhyaWasi Apna Store</span></p>
+                                                <span class="pspan" style="display: flex;">M.R.P: <span class="pspan"><del>{{myorderitem.price}} </del> (Inclusive of all taxes)</span></span>
+                                                <span class="pspan" style="display: flex;">Offer Price : <span class="pspan">₹{{myorderitem.discountprice}} (Inclusive of all taxes)</span></span>
                                                 <button class="buy_again">Buy it again</button>
                                               </div>
                                             </div>

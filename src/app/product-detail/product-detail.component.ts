@@ -76,7 +76,7 @@ export class ProductDetailComponent implements OnInit {
 
 
   placeOrder() {
-    this.router.navigate(['/product-cart'], { replaceUrl: true });
+    this.router.navigate(['/product-cart']);
   }
 
 
@@ -94,7 +94,7 @@ export class ProductDetailComponent implements OnInit {
   }
   moreinforelatedprod(productitem_name)
   {
-    this.router.navigate(['/product-detail'], { queryParams: { productitem_name: productitem_name }, replaceUrl: true });
+    this.router.navigate(['/product-detail'], { queryParams: { productitem_name: productitem_name } });
     this.SessionStateService.set('productdetailsearchsection', productitem_name, true);
   }
   moreinfo(productitem_name)

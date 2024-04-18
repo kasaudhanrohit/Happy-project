@@ -53,10 +53,10 @@ export class ProductComponent implements OnInit {
     }
   }
   moreinfo(productitem_name) {
-    this.router.navigate(['/product-detail'], { queryParams: { productitem_name: productitem_name }, replaceUrl: true });
+    this.router.navigate(['/product-detail'], { queryParams: { productitem_name: productitem_name } });
   }
   placeOrder() {
-    this.router.navigate(['/product-cart'], { replaceUrl: true });
+    this.router.navigate(['/product-cart']);
   }
 
   ngAfterViewInit() {

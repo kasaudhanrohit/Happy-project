@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttprequestService } from '../common-service/httprequest.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-my-order',
   templateUrl: './my-order.component.html',
@@ -9,7 +9,7 @@ import { HttprequestService } from '../common-service/httprequest.service';
 export class MyOrderComponent implements OnInit {
   busy = true;
   myorderdata = [];
-  constructor(private httpreq : HttprequestService) { }
+  constructor(private httpreq : HttprequestService,private router:Router,) { }
 
   ngOnInit(): void {
     this.busy = false;
@@ -36,6 +36,11 @@ export class MyOrderComponent implements OnInit {
           console.log(" this.myorderdata ",this.myorderdata);
           }
       });
+  }
+
+  openproductdetail(productname)
+  {
+    this.router.navigate(['/product-detail'], { queryParams: { productitem_name: productname } });
   }
 
 }
