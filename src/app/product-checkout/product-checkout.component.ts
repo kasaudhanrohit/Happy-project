@@ -110,9 +110,10 @@ export class ProductCheckoutComponent implements OnInit {
     orderinfo["billingform"] = this.billingform.value;
     orderinfo["shippingform"] = this.shippingform.value;
     let cartitem = JSON.parse(JSON.stringify(this.cartitemsinfo));
-    let logedinuserinfo = JSON.parse(localStorage.getItem("userinfo"));
-    let orderid = logedinuserinfo.username+"_"+ new Date().getTime();
-    let obj = cartitem.map((val) => { return{ 'orderid':orderid,'quantity': val.cartvalue, 'productname': val.productname, 'producttype': val.producttype,'productimgsrc':val.productimgscr, 'price': val.price, 'discountprice': val.discountprice,'total': (val.cartvalue * val.discountprice),'status':'in progress' } })
+    let logedinuserinfo = JSON.parse(localStorage.getItem("userinfo")) || {"username":"guest","mobileno":"","emailid":""};
+    let date = new Date();
+    let orderid = logedinuserinfo.username+"_"+ date.getTime();
+    let obj = cartitem.map((val) => { return{ 'orderid':orderid,'quantity': val.cartvalue, 'productname': val.productname, 'producttype': val.producttype,'productimgsrc':val.productimgscr, 'price': val.price, 'discountprice': val.discountprice,'total': (val.cartvalue * val.discountprice),'status':'in progress' ,'ordertime':date.toDateString()} })
     
     orderinfo["cartitemsinfo"] = obj;
     console.log("Placed Ordered orderinfo : ", orderinfo);

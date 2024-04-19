@@ -13,7 +13,7 @@ export class MyOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.busy = false;
-    let logedinuserinfo = JSON.parse(localStorage.getItem("userinfo"));
+    let logedinuserinfo = JSON.parse(localStorage.getItem("userinfo")) || {"username":"guest","mobileno":"","emailid":""};
     this.httpreq.getuserorderinfo({"username":logedinuserinfo.username}).subscribe((data )=>
       { 
         console.log("getuserorderinfo response : " ,data)
@@ -23,12 +23,13 @@ export class MyOrderComponent implements OnInit {
             let dataarr = data[0]['data'];
             const groupedOrders = dataarr.reduce((acc, order) => {
               const orderId = order.orderid;
+              const orderTime = order.ordertime;
               const existingOrder = acc.find(item => item.orderid === orderId);
           
               if (existingOrder) {
                   existingOrder.data.push(order);
               } else {
-                  acc.push({ orderid: orderId, data: [order] });
+                  acc.push({ orderid: orderId,ordertime:orderTime ,data: [order] });
               }
               return acc;
           }, []);

@@ -50,9 +50,10 @@
                                             </div>
                                           </div>
                                           <div *ngFor="let myorderitem of myorderdataobj['data'];let j=index" class="itemDetails">
-                                            <h3>Delivered 16-Mar-2019</h3>
+                                            <p><strong>Status : </strong>{{myorderitem.status}}</p>
                                             <p>Package was handed to a receptionist</p>
                                             <p>Signed by: Priti.</p>
+                                            <br>
                                             <div class="itemInfo">
                                               <div class="itemImg">
                                                 <img src="{{myorderitem.productimgsrc}}" alt="">
