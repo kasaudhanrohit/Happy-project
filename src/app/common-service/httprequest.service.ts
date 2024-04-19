@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +38,7 @@ export class HttprequestService {
   // POST request
   adduserorderinfo(item: any): Observable<any> {
     if(item.username && item.username == 'guest')
-      return ;
+      return of(null);;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<any>(`${this.apiUrl}/adduserorderinfo`, item,{ headers});
   }
@@ -46,27 +46,27 @@ export class HttprequestService {
    // POST request
    getuserorderinfo(item: any): Observable<any> {
     if(item.username && item.username == 'guest')
-      return ;
+      return of(null);;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<any>(`${this.apiUrl}/getuserorderinfo`, item,{ headers});
   }
 
   addusercartinfo(item: any): Observable<any> {
     if(item.username && item.username == 'guest')
-      return ;
+      return of(null);;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<any>(`${this.apiUrl}/addusercartinfo`, item,{ headers});
   }
 
   deleteusercartinfo(item: any): Observable<any> {
     if(item.username && item.username == 'guest')
-      return ;
+      return of(null);;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<any>(`${this.apiUrl}/deleteusercartinfo`, item,{ headers});
   }
   updateusercartinfo(item: any): Observable<any> {
     if(item.username && item.username == 'guest')
-      return ;
+      return of(null);;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<any>(`${this.apiUrl}/updateusercartinfo`, item,{ headers});
   }
@@ -74,7 +74,7 @@ export class HttprequestService {
 
   getusercartinfo(item: any): Observable<any> {
     if(item.username && item.username == 'guest')
-      return ;
+      return of(null);;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<any>(`${this.apiUrl}/getusercartinfo`, item,{ headers});
   }
