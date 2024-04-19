@@ -25,28 +25,27 @@
                           <div class="customer_details">      
                                         <div class="orderCard">
                                           <div class="orderHead">
-                                            <ul class="orderLeft">
+                                            <!-- <ul class="orderLeft">
                                               <li>
-                                                <p>ORDER PLACED <span>12 March 2019</span></p>
+                                                <p>Order Placed <span>{{ myorderdataobj.ordertime}}</span></p>
                                               </li>
                                               <li>
-                                                <p>TOTAL <span>$413.00</span></p>
+                                                <p>Total <span>₹{{total}}</span></p>
                                               </li>                  
-                                              <li>
-                                                <p>SHIP TO <span class="customerName">Customer Name</span>
-                                                  <span class="cstmrInfo">
-                                                    <strong>Customer Name</strong> Lorem Ipsum is simply dummy text
-                                                  </span>
-                                                </p>
-                                               
-                                              </li>
-                                            </ul>
+                                            </ul> -->
                                             <div class="invoiceDetails">
-                                              <p style="margin: 0 0 0 0;">OrderID: {{ myorderdataobj.orderid}} </p>
+                                              <p style="margin: 0 0 0 0;">Order Placed: <span>{{ myorderdataobj.ordertime}} </span></p>
                                               <span style="display: grid;">
-                                              <a style="color:#28479c;cursor: pointer">Order Details</a>
-                                              <a style="color:#28479c;cursor: pointer ;" >Invoice</a>
-                                          </span>
+                                                <p>Total<span class="customerName">₹{{total}}</span> </p>
+                                              <!-- <a style="color:#28479c;cursor: pointer ;" >Invoice</a> -->
+                                               </span>
+                                            </div>
+                                            <div class="invoiceDetails">
+                                              <p style="margin: 0 0 0 0;">OrderID: <span>{{ myorderdataobj.orderid}} </span></p>
+                                              <span style="display: grid;">
+                                                <p>SHIP TO <span class="customerName">Customer Name</span></p>
+                                              <!-- <a style="color:#28479c;cursor: pointer ;" >Invoice</a> -->
+                                               </span>
                                             </div>
                                           </div>
                                           <div *ngFor="let myorderitem of myorderdataobj['data'];let j=index" class="itemDetails">

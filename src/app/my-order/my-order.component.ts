@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class MyOrderComponent implements OnInit {
   busy = true;
   myorderdata = [];
+  total = 0;
   constructor(private httpreq : HttprequestService,private router:Router,) { }
 
   ngOnInit(): void {
@@ -21,15 +22,19 @@ export class MyOrderComponent implements OnInit {
           {
             console.log("data[0][data] ",data[0]['data']);
             let dataarr = data[0]['data'];
+            
             const groupedOrders = dataarr.reduce((acc, order) => {
+              console.log(order,"ssssssssss");
               const orderId = order.orderid;
               const orderTime = order.ordertime;
               const existingOrder = acc.find(item => item.orderid === orderId);
-          
+              console.log("existingOrder  ",existingOrder);
+              this.total += Number(order.total);
               if (existingOrder) {
                   existingOrder.data.push(order);
+
               } else {
-                  acc.push({ orderid: orderId,ordertime:orderTime ,data: [order] });
+                  acc.push({ orderid: orderId,ordertime:orderTime ,data: [order]});
               }
               return acc;
           }, []);
