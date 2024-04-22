@@ -48,6 +48,9 @@
     .pspan{
         font-size: 13px !important; 
     }
+    .ProgressBar-step:before, .ProgressBar-step:after {
+        top: 26% !important
+    }
   }
   
 
@@ -186,7 +189,7 @@
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
-      cursor: pointer;
+     
   }
   
   .ProgressBar-step {
@@ -202,7 +205,7 @@
     z-index: 1;
     width: 100%;
     left: -50%;
-    top: 50%;
+    top: 32%;
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
     -webkit-transition: all .25s ease-out;
@@ -215,6 +218,7 @@
     background-color: #7ED321;
     width: 0%;
   }
+  
   .ProgressBar-step.is-complete + .ProgressBar-step.is-current:after, .ProgressBar-step.is-complete + .ProgressBar-step.is-complete:after {
     width: 100%;
   }

@@ -48,20 +48,26 @@
                                           <div>
                                             <ol class="ProgressBar">
                                               <li class="ProgressBar-step">
+                                                <span class="pspan">Order Placed</span>
                                                 <svg class="ProgressBar-icon"></svg>
-                                                <span class="ProgressBar-stepLabel">Order Confirmed</span>
+                                                <span class="pspan"></span>
                                               </li>
                                               <li class="ProgressBar-step">
+                                                <span class="pspan">Shipped</span>
                                                 <svg class="ProgressBar-icon"></svg>
-                                                <span class="ProgressBar-stepLabel">Shipped</span>
+                                                <span class="pspan" *ngIf="myorderdataobj.onway1 != ''">ddddddd ddd {{myorderdataobj.onway1}}</span>
+                                                <span class="pspan" *ngIf="myorderdataobj.onway2 != ''">sssssss ddd {{myorderdataobj.onway2}}</span>
+                                                <span class="pspan" *ngIf="myorderdataobj.onway3 != ''">11111s sss ffffff aaaa sss {{myorderdataobj.onway3}}</span>
                                               </li>
                                               <li class="ProgressBar-step">
+                                                <span class="pspan">Out for delivery</span>
                                                 <svg class="ProgressBar-icon"></svg>
-                                                <span class="ProgressBar-stepLabel">Out for delivery</span>
+                                                <span class="pspan"></span>
                                               </li>
                                               <li class="ProgressBar-step">
+                                                <span class="pspan">Delivered</span>
                                                 <svg class="ProgressBar-icon"></svg>
-                                                <span class="ProgressBar-stepLabel">Delivered</span>
+                                                <span class="pspan"></span>
                                               </li>
                                             </ol>                                                
                                           </div>

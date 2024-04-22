@@ -42,7 +42,7 @@ export class MyOrderComponent implements OnInit {
           }, new Map());
           
           const groupedOrders = [...groupedOrdersMap.values()];
-          this.myorderdata =groupedOrders;
+          this.myorderdata =groupedOrders;      
           console.log(" this.myorderdata ",this.myorderdata);
           }
       });
@@ -53,23 +53,5 @@ export class MyOrderComponent implements OnInit {
     this.router.navigate(['/product-detail'], { queryParams: { productitem_name: productname } });
   }
 
-
- /* $("#next").on("click", function() {
-    var $bar = $(".ProgressBar");
-    if ($bar.children(".is-current").length > 0) {
-      $bar.children(".is-current").removeClass("is-current").addClass("is-complete").next().addClass("is-current");
-    } else {
-      $bar.children().first().addClass("is-current");
-    }
-  });
   
-  $("#previous").on("click", function() {
-    var $bar = $(".ProgressBar");
-    if ($bar.children(".is-current").length > 0) {
-      $bar.children(".is-current").removeClass("is-current").prev().removeClass("is-complete").addClass("is-current");
-    } else {
-      $bar.children(".is-complete").last().removeClass("is-complete").addClass("is-current");
-    }
-  });
-  */
 }
