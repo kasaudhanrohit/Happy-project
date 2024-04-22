@@ -25,34 +25,48 @@
                           <div class="customer_details">      
                                         <div class="orderCard">
                                           <div class="orderHead">
-                                            <!-- <ul class="orderLeft">
-                                              <li>
-                                                <p>Order Placed <span>{{ myorderdataobj.ordertime}}</span></p>
-                                              </li>
-                                              <li>
-                                                <p>Total <span>₹{{total}}</span></p>
-                                              </li>                  
-                                            </ul> -->
                                             <div class="invoiceDetails">
                                               <p style="margin: 0 0 0 0;">Order Placed: <span>{{ myorderdataobj.ordertime}} </span></p>
                                               <span style="display: grid;">
-                                                <p>Total<span class="customerName">₹{{total}}</span> </p>
+                                                <p>Total: <span class="customerName">₹{{myorderdataobj.total}}</span> </p>
                                               <!-- <a style="color:#28479c;cursor: pointer ;" >Invoice</a> -->
                                                </span>
                                             </div>
                                             <div class="invoiceDetails">
                                               <p style="margin: 0 0 0 0;">OrderID: <span>{{ myorderdataobj.orderid}} </span></p>
                                               <span style="display: grid;">
-                                                <p>SHIP TO <span class="customerName">Customer Name</span></p>
+                                                <p>Ship to: <span class="customerName">{{username}}</span></p>
                                               <!-- <a style="color:#28479c;cursor: pointer ;" >Invoice</a> -->
                                                </span>
                                             </div>
                                           </div>
+                                          <div>
+                                            <p style="margin: 0 0 0 0;"><strong>Status : </strong>{{myorderdataobj.orderstatus_status}}</p>
+                                            <p style="margin: 0 0 0 0;">Package was handed to a receptionist</p>
+                                            <p style="margin: 0 0 0 0;"> Signed by: Priti.</p>
+                                          </div>
+                                          <div>
+                                            <ol class="ProgressBar">
+                                              <li class="ProgressBar-step">
+                                                <svg class="ProgressBar-icon"></svg>
+                                                <span class="ProgressBar-stepLabel">Order Confirmed</span>
+                                              </li>
+                                              <li class="ProgressBar-step">
+                                                <svg class="ProgressBar-icon"></svg>
+                                                <span class="ProgressBar-stepLabel">Shipped</span>
+                                              </li>
+                                              <li class="ProgressBar-step">
+                                                <svg class="ProgressBar-icon"></svg>
+                                                <span class="ProgressBar-stepLabel">Out for delivery</span>
+                                              </li>
+                                              <li class="ProgressBar-step">
+                                                <svg class="ProgressBar-icon"></svg>
+                                                <span class="ProgressBar-stepLabel">Delivered</span>
+                                              </li>
+                                            </ol>                                                
+                                          </div>
                                           <div *ngFor="let myorderitem of myorderdataobj['data'];let j=index" class="itemDetails">
-                                            <p><strong>Status : </strong>{{myorderitem.status}}</p>
-                                            <p>Package was handed to a receptionist</p>
-                                            <p>Signed by: Priti.</p>
-                                            <br>
+                                            
                                             <div class="itemInfo">
                                               <div class="itemImg">
                                                 <img src="{{myorderitem.productimgsrc}}" alt="">
@@ -60,6 +74,7 @@
                                               <div class="itemDesc">
                                                 <h4 (click)="openproductdetail( myorderitem.productname)">{{ myorderitem.productname}}</h4>
                                                 <p class="pspan">Sold by: <span class="pspan">AyodhyaWasi Apna Store</span></p>
+                                                <span class="pspan" style="display: flex;">Quantity: <span class="pspan">{{myorderitem.quantity}}</span></span>
                                                 <span class="pspan" style="display: flex;">MRP: <span class="pspan"><del>{{myorderitem.price}} </del> (Inclusive of all taxes)</span></span>
                                                 <span class="pspan" style="display: flex;">Sell MRP: <span class="pspan">₹{{myorderitem.discountprice}} (Inclusive of all taxes)</span></span>
                                                 <button class="buy_again">Buy it again</button>

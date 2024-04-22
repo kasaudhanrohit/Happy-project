@@ -103,7 +103,7 @@ export class ProductCheckoutComponent implements OnInit {
       // Display error messages or take appropriate action
       this.messageService.add({ key: 'my_key', severity: 'warn', summary: 'Warning', detail: "Please Enter the detail" });
       console.log('Form is invalid. Please check the fields.');
-      return;
+      //return;
     }
 
     let orderinfo ={};
@@ -125,7 +125,7 @@ export class ProductCheckoutComponent implements OnInit {
 
 
     
-    let userorderinfo = {'username':logedinuserinfo.username,"cartitemsinfo":obj};
+    let userorderinfo = {'username':logedinuserinfo.username,"cartitemsinfo":obj,'orderid':orderid};
     this.httpreqService.adduserorderinfo(userorderinfo).subscribe(
       (data: any) => {
         console.log(" userorderinforeq data ",data);
@@ -133,16 +133,16 @@ export class ProductCheckoutComponent implements OnInit {
       });
 
 
-    this.httpreqService.placedordermail(orderinfo).subscribe(
-      (data: any) => {
+    // this.httpreqService.placedordermail(orderinfo).subscribe(
+    //   (data: any) => {
 
-        console.log("placedordermail data : ", data);
-        //redirect into login page after successfully signup
-        // this.router.navigate(['/login'], { replaceUrl: true });
-      },
-      (error) => {
-        console.error('Error fetching items:', error);
-      });
+    //     console.log("placedordermail data : ", data);
+    //     //redirect into login page after successfully signup
+    //     // this.router.navigate(['/login'], { replaceUrl: true });
+    //   },
+    //   (error) => {
+    //     console.error('Error fetching items:', error);
+    //   });
 
     setTimeout(() => {
       btn.classList.remove("place-order--placing");
