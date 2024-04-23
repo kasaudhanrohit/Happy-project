@@ -40,37 +40,28 @@
                                                </span>
                                             </div>
                                           </div>
-                                          <div>
+                                          <div style="padding: 5px;">
                                             <p style="margin: 0 0 0 0;"><strong>Status : </strong>{{myorderdataobj.orderstatus_status}}</p>
-                                            <p style="margin: 0 0 0 0;">Package was handed to a receptionist</p>
-                                            <p style="margin: 0 0 0 0;"> Signed by: Priti.</p>
+                                            <!-- <p style="margin: 0 0 0 0;">Package was handed to a receptionist</p> -->
+                                            <!-- <p style="margin: 0 0 0 0;"> Signed by: Priti.</p> -->
                                           </div>
-                                          <div>
-                                            <ol class="ProgressBar">
-                                              <li class="ProgressBar-step">
-                                                <span class="pspan">Order Placed</span>
-                                                <svg class="ProgressBar-icon"></svg>
-                                                <span class="pspan"></span>
-                                              </li>
-                                              <li class="ProgressBar-step">
-                                                <span class="pspan">Shipped</span>
-                                                <svg class="ProgressBar-icon"></svg>
-                                                <span class="pspan" *ngIf="myorderdataobj.onway1 != ''">ddddddd ddd {{myorderdataobj.onway1}}</span>
-                                                <span class="pspan" *ngIf="myorderdataobj.onway2 != ''">sssssss ddd {{myorderdataobj.onway2}}</span>
-                                                <span class="pspan" *ngIf="myorderdataobj.onway3 != ''">11111s sss ffffff aaaa sss {{myorderdataobj.onway3}}</span>
-                                              </li>
-                                              <li class="ProgressBar-step">
-                                                <span class="pspan">Out for delivery</span>
-                                                <svg class="ProgressBar-icon"></svg>
-                                                <span class="pspan"></span>
-                                              </li>
-                                              <li class="ProgressBar-step">
-                                                <span class="pspan">Delivered</span>
-                                                <svg class="ProgressBar-icon"></svg>
-                                                <span class="pspan"></span>
-                                              </li>
-                                            </ol>                                                
-                                          </div>
+
+                                          <div style="padding: 5px;height: 200px;">
+                                            <p-timeline [value]="events" layout="horizontal"  align="top"  >
+                                              <ng-template pTemplate="marker" let-event>
+                                                <span>
+                                                    <i [ngClass]="event.icon"></i>
+                                                </span>
+                                            </ng-template>       
+                                                <ng-template pTemplate="content" let-event>
+                                                    <small class="p-text-secondary">{{ event.data}}</small>
+                                                </ng-template>
+                                                <ng-template pTemplate="opposite" let-event>
+                                                    {{event.status}}
+                                                </ng-template>
+                                            </p-timeline>
+                                        </div>
+                                        
                                           <div *ngFor="let myorderitem of myorderdataobj['data'];let j=index" class="itemDetails">
                                             
                                             <div class="itemInfo">

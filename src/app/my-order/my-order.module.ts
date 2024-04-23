@@ -6,12 +6,13 @@ import { NavBarModule } from '../nav-bar/nav-bar.module';
 import { RouterModule, Routes } from '@angular/router';
 import { MyOrderComponent } from './my-order.component';
 import {TableModule} from 'primeng/table';
-
+import {TimelineModule} from 'primeng/timeline';
 const routes: Routes = [
   { path: '', component: MyOrderComponent }
 ];
 
 const imports = [
+  TimelineModule,
   TableModule,
   CommonModule,
   AboutInfoModule,
