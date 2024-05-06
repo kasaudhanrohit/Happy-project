@@ -129,7 +129,10 @@ export class ProductCheckoutComponent implements OnInit {
     this.httpreqService.adduserorderinfo(userorderinfo).subscribe(
       (data: any) => {
         console.log(" userorderinforeq data ",data);
-
+        this.httpreqService.deleteusercartinfo({"username":logedinuserinfo.username,"carditemid":"all"}).subscribe((data )=>
+          { 
+            console.log("delete usercatinfo response : " ,data)
+          });
       });
 
 

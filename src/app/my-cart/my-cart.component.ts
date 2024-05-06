@@ -9,12 +9,14 @@ import { Router } from '@angular/router';
 export class MyCartComponent implements OnInit {
   busy = true;
   myorderdata = [];
+  username = "guest";
   constructor(private router:Router,private httpreq : HttprequestService) { }
 
   ngOnInit(): void {
     this.busy = false;
     this.myorderdata = [];
-    let logedinuserinfo = JSON.parse(localStorage.getItem("userinfo"));
+    let logedinuserinfo = JSON.parse(localStorage.getItem("userinfo")) || {"username":"guest","mobileno":"","emailid":""};
+    this.username=logedinuserinfo.username;
     this.httpreq.getusercartinfo({"username":logedinuserinfo.username}).subscribe((data )=>
       { 
         console.log("getuserorderinfo response : " ,data)
