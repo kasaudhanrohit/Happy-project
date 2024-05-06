@@ -1,1 +1,27 @@
 <p>admin-userinfo works!</p>
+
+<p-calendar  [(ngModel)]="calvalue" dateFormat="dd/mm/yy" [maxDate]="maxDate" ></p-calendar>
+<p-button label="Get Record" (click)="getRecord()" ></p-button>
+
+<p-table [value]="customers" [columns]="cols" [rows]="10"  [rowsPerPageOptions]="[10,25,50]" >
+    <ng-template pTemplate="header" let-columns>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <td *ngFor="let col of columns">
+                <span *ngIf="col.field != 'action'">{{rowData[col.field]}}</span>
+                <span *ngIf="col.field == 'action'"><i class="pi pi-cog" title="Open User Data"></i></span>
+            </td>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No customers found.</td>
+            </tr>
+    </ng-template>
+</p-table>
+
+
+
