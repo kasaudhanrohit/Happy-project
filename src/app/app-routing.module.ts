@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'myorder', loadChildren: () => import('./my-order/my-order.module').then(m => m.MyOrderModule) },
   { path: 'about-info', loadChildren: () => import('./about-info/about-info.module').then(m => m.AboutInfoModule) },
   { path: 'adminuserinfo', loadChildren: () => import('./admin-userinfo/admin-userinfo.module').then(m => m.AdminUserinfoModule) },
+  { path: 'adminorderstatus', loadChildren: () => import('./admin-orderstatus/admin-orderstatus.module').then(m => m.AdminOrderstatusModule) },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }, // 404 handling,
   

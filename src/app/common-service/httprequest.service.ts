@@ -86,4 +86,10 @@ export class HttprequestService {
     return this.http.post<any>(`${this.apiUrl}/placedordermail`, item, { headers });
   }
 
+  adminorderstatus(item: any): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(`${this.apiUrl}/adminorderstatus`,item, { headers });
+  }
+
+
 }

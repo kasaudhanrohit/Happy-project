@@ -1,0 +1,41 @@
+<p>admin-userinfo works!</p>
+
+
+<p-calendar  [(ngModel)]="calvalue" dateFormat="dd/mm/yy" [maxDate]="maxDate" ></p-calendar>
+
+<p-button label="Get Record" (click)="getRecord()" ></p-button>
+
+<p-table [value]="customers" [columns]="cols" [rows]="10"  [rowsPerPageOptions]="[10,25,50]" >
+    <ng-template pTemplate="header" let-columns>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <td *ngFor="let col of columns">
+                <span *ngIf="col.field != 'action'">{{rowData[col.field]}}</span>
+                <span *ngIf="col.field == 'action'">
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success" (click)="editProduct(rowData)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(rowData)"></button>
+                </span>
+            </td>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No customers found.</td>
+            </tr>
+    </ng-template>
+</p-table>
+<p-dialog header="Header" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+    [draggable]="false" [resizable]="false">
+    <div class="inputdialog"><h5>Status</h5><input type="text" pInputText [(ngModel)]="value1"> </div>
+    <div class="inputdialog"><h5>On way1</h5><input type="text" pInputText [(ngModel)]="value1"> </div>
+    <div class="inputdialog"><h5>On way2</h5><input type="text" pInputText [(ngModel)]="value1"> </div>
+    <div class="inputdialog"><h5>On way3</h5><input type="text" pInputText [(ngModel)]="value1"> </div>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
