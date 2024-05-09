@@ -73,68 +73,30 @@ export class AdminOrderstatusComponent implements OnInit {
   {
     console.log("hello hello event ",event);
     this.detailuserorderinfo = [];
-    this.detailuserorderinfo=[
-      {
-          "orderid": "rohit7_1715077860243",
-          "username":event.data.username,
-          "ordertime": "Tue May 07 2024",
-          "data": [
-              {
-                  "orderid": "rohit7_1715077860243",
-                  "producttype": "flour",
-                  "productname": "Organic Whole Wheat Flour(Atta)–1Kg",
-                  "productimgsrc": "assets/images/AttaPacket.jpg",
-                  "quantity": "1",
-                  "price": "₹40",
-                  "discountprice": "35",
-                  "total": "35",
-                  "order_status": "in progress",
-                  "ordertime": "Tue May 07 2024",
-                  "orderstatus_status": "in progress",
-                  "sellaprvl": "approved",
-                  "onway1": "",
-                  "onway2": "",
-                  "onway3": ""
-              },
-              {
-                  "orderid": "rohit7_1715077860243",
-                  "producttype": "flour",
-                  "productname": "Organic Whole Wheat Flour(Atta)–2Kg",
-                  "productimgsrc": "assets/images/AttaPacket.jpg",
-                  "quantity": "1",
-                  "price": "₹80",
-                  "discountprice": "70",
-                  "total": "70",
-                  "order_status": "in progress",
-                  "ordertime": "Tue May 07 2024",
-                  "orderstatus_status": "in progress",
-                  "sellaprvl": "approved",
-                  "onway1": "",
-                  "onway2": "",
-                  "onway3": ""
-              },
-              {
-                  "orderid": "rohit7_1715077860243",
-                  "producttype": "oil",
-                  "productname": "Organic Mustard Oil–500 ML",
-                  "productimgsrc": "assets/images/oilbottlesmall.png",
-                  "quantity": "1",
-                  "price": "₹40",
-                  "discountprice": "35",
-                  "total": "35",
-                  "order_status": "in progress",
-                  "ordertime": "Tue May 07 2024",
-                  "orderstatus_status": "in progress",
-                  "sellaprvl": "approved",
-                  "onway1": "",
-                  "onway2": "",
-                  "onway3": ""
-              }
-          ],
-          "total": 140,
-          "orderstatus_status": "in progress"
-      }
-  ];
+    this.httpreq.admindetailuserorderstatus({"username":event?.data?.username,"orderid":event?.data?.orderid}).subscribe((data )=>
+      { 
+        console.log("getuserorderinfo response : " ,data)
+        if(data && data[0] && data[0]['status'] == "success")
+          {
+            let dataarr = data[0]['data'];  
+            const groupedOrdersMap = dataarr.reduce((map, order) => {
+            const orderId = order.orderid;
+            const username = event?.data?.username;
+              if (map.has(orderId)) {
+                  map.get(orderId).data.push(order);
+                  map.get(orderId).total += parseFloat(order.total);
+              } else {
+                const orderTime = order.ordertime;
+                map.set(orderId, { orderid: orderId, ordertime: orderTime, data: [order] ,total: parseFloat(order.total),username:username});
+              }   
+              return map;
+          }, new Map());
+          
+          const groupedOrders = [...groupedOrdersMap.values()];
+          this.detailuserorderinfo =groupedOrders; 
+          console.log("detailuserorderinfo ",this.detailuserorderinfo);
+          }
+      });
   }
   deleteProduct(product) {
     this.confirmationService.confirm({
