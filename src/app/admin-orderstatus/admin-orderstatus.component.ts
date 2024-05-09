@@ -14,6 +14,13 @@ export class AdminOrderstatusComponent implements OnInit {
   customers=[];
   displayModal = false;
   value1 = "";
+  statusval = "";
+  onwayval1="";
+  onwayval2="";
+  onwayval3="";
+  selleraprval="";
+  detailuserorderinfo = [];
+  detailcols = [];
   constructor(private confirmationService:ConfirmationService,private router:Router,private httpreq : HttprequestService) { }
 
   ngOnInit(): void {
@@ -24,6 +31,7 @@ export class AdminOrderstatusComponent implements OnInit {
       { field: 'status', header: 'Status' },
       { field: 'action', header: 'Action' },
   ];
+
 
   // this.httpreq.adminorderstatus().subscribe((data )=>
   //   { 
@@ -57,7 +65,77 @@ export class AdminOrderstatusComponent implements OnInit {
     console.log("edit rowData",rowData);
     this.displayModal = true;
   }
-
+  submitRecord()
+  {
+    console.log("submitrecord item ");
+  }
+  getUserOrderdetailindo(event)
+  {
+    console.log("hello hello event ",event);
+    this.detailuserorderinfo = [];
+    this.detailuserorderinfo=[
+      {
+          "orderid": "rohit7_1715077860243",
+          "username":event.data.username,
+          "ordertime": "Tue May 07 2024",
+          "data": [
+              {
+                  "orderid": "rohit7_1715077860243",
+                  "producttype": "flour",
+                  "productname": "Organic Whole Wheat Flour(Atta)–1Kg",
+                  "productimgsrc": "assets/images/AttaPacket.jpg",
+                  "quantity": "1",
+                  "price": "₹40",
+                  "discountprice": "35",
+                  "total": "35",
+                  "order_status": "in progress",
+                  "ordertime": "Tue May 07 2024",
+                  "orderstatus_status": "in progress",
+                  "sellaprvl": "approved",
+                  "onway1": "",
+                  "onway2": "",
+                  "onway3": ""
+              },
+              {
+                  "orderid": "rohit7_1715077860243",
+                  "producttype": "flour",
+                  "productname": "Organic Whole Wheat Flour(Atta)–2Kg",
+                  "productimgsrc": "assets/images/AttaPacket.jpg",
+                  "quantity": "1",
+                  "price": "₹80",
+                  "discountprice": "70",
+                  "total": "70",
+                  "order_status": "in progress",
+                  "ordertime": "Tue May 07 2024",
+                  "orderstatus_status": "in progress",
+                  "sellaprvl": "approved",
+                  "onway1": "",
+                  "onway2": "",
+                  "onway3": ""
+              },
+              {
+                  "orderid": "rohit7_1715077860243",
+                  "producttype": "oil",
+                  "productname": "Organic Mustard Oil–500 ML",
+                  "productimgsrc": "assets/images/oilbottlesmall.png",
+                  "quantity": "1",
+                  "price": "₹40",
+                  "discountprice": "35",
+                  "total": "35",
+                  "order_status": "in progress",
+                  "ordertime": "Tue May 07 2024",
+                  "orderstatus_status": "in progress",
+                  "sellaprvl": "approved",
+                  "onway1": "",
+                  "onway2": "",
+                  "onway3": ""
+              }
+          ],
+          "total": 140,
+          "orderstatus_status": "in progress"
+      }
+  ];
+  }
   deleteProduct(product) {
     this.confirmationService.confirm({
         message: 'Are you sure you want to delete ' + product.name + '?',
