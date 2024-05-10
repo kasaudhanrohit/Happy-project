@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewEncapsulation} from '@angular/core';
 import { HttprequestService } from '../common-service/httprequest.service';
 import { Router } from '@angular/router';
 import { MessageService,ConfirmationService } from 'primeng/api';
 @Component({
   selector: 'app-admin-orderstatus',
   templateUrl: './admin-orderstatus.component.html',
-  styleUrls: ['./admin-orderstatus.component.scss']
+  styleUrls: ['./admin-orderstatus.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AdminOrderstatusComponent implements OnInit {
   calvalue = new Date();
@@ -13,6 +14,7 @@ export class AdminOrderstatusComponent implements OnInit {
   cols: any[];
   customers=[];
   displayModal = false;
+  displayuserinfodata = false;
   value1 = "";
   statusval = "";
   onwayval1="";
@@ -21,41 +23,27 @@ export class AdminOrderstatusComponent implements OnInit {
   selleraprval="";
   detailuserorderinfo = [];
   detailcols = [];
+  rowusername = "guest";
   constructor(private confirmationService:ConfirmationService,private router:Router,private httpreq : HttprequestService) { }
 
   ngOnInit(): void {
     this.cols = [
       { field: 'username', header: 'User Name' },
       { field: 'orderid', header: 'OrderId' },
-      { field: 'timestamp', header: 'Time Stamp' },
+      { field: 'timestamp', header: 'Time Stamp' ,pipe: 'date' },
       { field: 'status', header: 'Status' },
       { field: 'action', header: 'Action' },
   ];
-
-
-  // this.httpreq.adminorderstatus().subscribe((data )=>
-  //   { 
-  //     console.log("getuserorderinfo response : " ,data)
-  //     if(data && data[0] && data[0]['status'] == "success")
-  //       {
-  //         console.log("data[0][data] ",data[0]['data']);
-  //         this.customers = data[0]['data']
-  //       }
-  //   });
   }
 
   getRecord()
   {
-    console.log("getrecord",this.calvalue);
     let starttime = new Date(new Date(this.calvalue).toLocaleDateString()).getTime();
     let endtime = new Date().getTime();
-    console.log("starttime",starttime," endtime ",endtime);
     this.httpreq.adminorderstatus({"starttime":starttime,"endtime":endtime}).subscribe((data )=>
       { 
-        console.log("getuserorderinfo response : " ,data)
         if(data && data[0] && data[0]['status'] == "success")
           {
-            console.log("data[0][data] ",data[0]['data']);
             this.customers = data[0]['data']
           }
       });
@@ -81,7 +69,7 @@ export class AdminOrderstatusComponent implements OnInit {
             let dataarr = data[0]['data'];  
             const groupedOrdersMap = dataarr.reduce((map, order) => {
             const orderId = order.orderid;
-            const username = event?.data?.username;
+            const username = order.username;
               if (map.has(orderId)) {
                   map.get(orderId).data.push(order);
                   map.get(orderId).total += parseFloat(order.total);
@@ -108,4 +96,13 @@ export class AdminOrderstatusComponent implements OnInit {
         }
     });
 }
+
+ userinfodata(rowdata)
+  {
+    console.log("userinfo rowdata : ",rowdata);
+    
+    this.rowusername = rowdata.username;
+    this.displayuserinfodata = true;
+    console.log("userinfodata rowusername : ",this.rowusername);
+  }
 } 

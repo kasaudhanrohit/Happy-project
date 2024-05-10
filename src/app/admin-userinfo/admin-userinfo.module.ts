@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { LoaderModule } from '../loader/loader.module';
 import { NavBarModule } from '../nav-bar/nav-bar.module';
 import { AdminUserinfoComponent } from './admin-userinfo.component';
@@ -28,8 +28,7 @@ const components = [AdminUserinfoComponent];
 @NgModule({
   declarations: [components],
   imports: [
-    imports,
-    RouterModule.forChild(routes)
+    imports
   ],
   exports: [components],
 })

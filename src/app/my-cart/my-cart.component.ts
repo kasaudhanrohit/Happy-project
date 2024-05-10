@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { HttprequestService } from '../common-service/httprequest.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-my-cart',
   templateUrl: './my-cart.component.html',
-  styleUrls: ['./my-cart.component.scss']
+  styleUrls: ['./my-cart.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MyCartComponent implements OnInit {
   busy = true;

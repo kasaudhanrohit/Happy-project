@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewEncapsulation} from '@angular/core';
 import { HttprequestService } from '../common-service/httprequest.service';
 import { Router } from '@angular/router';
 import { PrimeIcons } from "primeng/api";
@@ -6,7 +6,8 @@ import { throwError } from 'rxjs';
 @Component({
   selector: 'app-my-order',
   templateUrl: './my-order.component.html',
-  styleUrls: ['./my-order.component.scss']
+  styleUrls: ['./my-order.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MyOrderComponent implements OnInit {
   busy = true;
