@@ -21,6 +21,8 @@ export class AdminOrderstatusComponent implements OnInit {
   onwayval2="";
   onwayval3="";
   selleraprval="";
+  orderid = "";
+  username="";
   detailuserorderinfo = [];
   detailcols = [];
   rowusername = "guest";
@@ -52,10 +54,29 @@ export class AdminOrderstatusComponent implements OnInit {
   {
     console.log("edit rowData",rowData);
     this.displayModal = true;
+    this.httpreq.adminuserorderstatus({"username":rowData.username,"orderid":rowData.orderid}).subscribe((data )=>
+      { 
+        if(data && data[0] && data[0]['status'] == "success")
+          {
+            let dataobj = data[0]['data'][0];
+            this.selleraprval= dataobj.sellaprvl;
+            this.statusval = dataobj.status;
+            this.onwayval1= dataobj.onway1;
+            this.onwayval2= dataobj.onway2;
+            this.onwayval3= dataobj.onway3;
+            this.orderid = dataobj.orderid;
+            this.username=dataobj.username;
+          }
+      });
   }
   submitRecord()
   {
-    console.log("submitrecord item ");
+    console.log("submitrecord item ",this.statusval,this.selleraprval,this.onwayval1,this.onwayval2, this.onwayval3,  this.orderid,this.username);
+    this.httpreq.adminupdateorderstatus({"status":this.statusval,"sellaprvl":this.selleraprval,"onway1":this.onwayval1,"onway2":this.onwayval2,"onway3":this.onwayval3,"orderid":this.orderid,"username":this.username}).subscribe((data )=>
+      {
+        console.log("adminupdateorderstatus data : ",data);
+      });
+
   }
   getUserOrderdetailindo(event)
   {
