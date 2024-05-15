@@ -8,12 +8,15 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
-import {InputTextModule} from 'primeng/inputtext';
+import { InputTextModule } from 'primeng/inputtext';
 import { AdminUserinfoModule } from '../admin-userinfo/admin-userinfo.module';
+import { CardModule } from 'primeng/card';
+
 const routes: Routes = [
   { path: '', component: AdminOrderstatusComponent }
 ];
 const imports = [
+  CardModule,
   AdminUserinfoModule,
   InputTextModule,
   DialogModule,

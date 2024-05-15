@@ -172,3 +172,79 @@
     cursor: pointer;
 }
 
+.hugesize
+{
+    font-size: 40px;
+}
+.text-right
+{
+    text-align: right;
+}
+
+.p-card .p-card-content
+{
+    padding: 0px !important
+}
+.p-card .p-card-body {
+    padding: .7rem !important;
+}
+
+.loaderhome {
+    filter: hue-rotate(0deg);
+    background: linear-gradient(45deg, #0f8, #08f);
+    animation: hue 10000ms infinite linear;
+}
+
+@keyframes hue {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+
+    100% {
+        filter: hue-rotate(360deg);
+    }
+
+}
+
+.setheight
+{
+    height: 100%;
+}
+
+.setpadding
+{
+    padding-top: 25px;
+}
+
+p-table tr,p-table td ,p-table th {
+    border: 2px solid red; 
+    padding: 7px;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+    border: 2px solid red;
+    border-width: 2px 2px 2px 2px;
+    padding: .3rem;
+}
+
+.marginleft
+{
+    margin-left: 5px;
+}
+
+.paneliconfont
+{
+    font-size: xxx-large;
+}
+
+.panelmoreinfo
+{
+    color: blue;
+    font-size: larger;
+}
+
+.dashboardtextcss
+{
+    text-align: center;
+    padding-bottom: 20px;
+}

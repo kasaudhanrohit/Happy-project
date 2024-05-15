@@ -1,122 +1,230 @@
-<p>admin-userinfo works!</p>
+<!-- Navigation -->
+<div class="loaderhome setheight">
+  <div class="container setpadding">
+    <div class="row dashboardtextcss" >
+      <div class="col-lg-12">
+        <h1 >Welcome to Store Dashboard</h1>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
 
+    <!-- /.row -->
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <p-card [style]="{'background':'aqua'}">
+          <div class="row">
+            <div class="col-lg-6 col-md-12">
+              <i class="pi pi-user paneliconfont"></i>
+            </div>
+            <div class="col-lg-6 col-md-12 text-right">
+              <div class="hugesize">26</div>
+              <div>Total Users</div>
+            </div>
+            <div class="text-right">
+              <i class="pi pi-arrow-right panelmoreinfo"></i>
+            </div>
+          </div>
+        </p-card>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <p-card [style]="{'background':'green'}">
+          <div class="row">
+            <div class="col-lg-6 col-md-12">
+              <i class="pi pi-server paneliconfont "></i>
+            </div>
+            <div class="col-lg-6 col-md-12 text-right">
+              <div class="hugesize">26</div>
+              <div>Total Order</div>
+            </div>
+            <div class="text-right">
+              <i class="pi pi-arrow-right panelmoreinfo"></i>
+            </div>
+          </div>
+        </p-card>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <p-card [style]="{'background':'pink'}">
+          <div class="row">
+            <div class="col-lg-6 col-md-12">
+              <i class="pi pi-cart-arrow-down paneliconfont"></i>
+            </div>
+            <div class="col-lg-6 col-md-12 text-right">
+              <div class="hugesize">26</div>
+              <div>Recent Order</div>
+            </div>
+            <div class="text-right">
+              <i class="pi pi-arrow-right panelmoreinfo"></i>
+            </div>
+          </div>
+        </p-card>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <p-card [style]="{'background':'yellow'}">
+          <div class="row">
+            <div class="col-lg-6 col-md-12">
+              <i class="pi pi-wallet paneliconfont "></i>
+            </div>
+            <div class="col-lg-6 col-md-12 text-right">
+              <div class="hugesize">26</div>
+              <div>Total Revenue</div>
+            </div>
+            <div class="text-right">
+              <i class="pi pi-arrow-right panelmoreinfo"></i>
+            </div>
+          </div>
+        </p-card>
+      </div>
+    </div>
+  </div>
 
-<p-calendar  [(ngModel)]="calvalue" dateFormat="dd/mm/yy" [maxDate]="maxDate" ></p-calendar>
+  <!-- /#wrapper -->
 
-<p-button label="Get Record" (click)="getRecord()" ></p-button>
+  <div class="container">
+    <div class="row">
+      <div style="padding-top: 20px;">
+        <h3>Recent Order Status</h3>
+      </div>
+      <div style="display: flex;padding-top: 15px;padding-bottom: 10px;gap: 10px;">
+        <p-calendar [(ngModel)]="calvalue" dateFormat="dd/mm/yy" [maxDate]="maxDate"></p-calendar>
 
-<p-table [value]="customers" [columns]="cols" [rows]="10"  (onRowExpand)="getUserOrderdetailindo($event)" [rowsPerPageOptions]="[10,25,50]" dataKey="orderid" >
-    <ng-template pTemplate="header" let-columns>
-            <th *ngFor="let col of columns">
-                {{col.header}}
-            </th>
-    </ng-template>
+        <p-button label="Get Record" (click)="getRecord()"></p-button>
+      </div>
+      <p-table [value]="customers" [columns]="cols" [rows]="10" (onRowExpand)="getUserOrderdetailindo($event)"
+        [rowsPerPageOptions]="[10,25,50]" dataKey="orderid">
+        <ng-template pTemplate="header" let-columns>
+          <th *ngFor="let col of columns">
+            {{col.header}}
+          </th>
+        </ng-template>
 
-    <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
-           <tr>
+        <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
+          <tr>
             <td *ngFor="let col of columns">
-                <span *ngIf="col.field != 'action'">
-                  <ng-container *ngIf="col.field !== 'timestamp'; else dateColumn">
-                    {{rowData[col.field]}}
-                  </ng-container>
-                  <ng-template #dateColumn>
-                    {{rowData[col.field] | date:'HH:mm:ss dd/MM/yyyy '}}
-                  </ng-template>
+              <span *ngIf="col.field != 'action'">
+                <ng-container *ngIf="col.field !== 'timestamp'; else dateColumn">
+                  {{rowData[col.field]}}
+                </ng-container>
+                <ng-template #dateColumn>
+                  {{rowData[col.field] | date:'HH:mm:ss dd/MM/yyyy '}}
+                </ng-template>
 
-                </span>
-                <span *ngIf="col.field == 'action'">
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success" (click)="editProduct(rowData)"></button>
-                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(rowData)"></button>
-                    <button pButton pRipple icon="pi pi-user" class="p-button-rounded p-button-success" (click)="userinfodata(rowData)"></button>
-                    <button type="button" pButton pRipple [pRowToggler]="rowData" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-                </span>
+              </span>
+              <span *ngIf="col.field == 'action'">
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success"
+                  (click)="editProduct(rowData)"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning marginleft"
+                  (click)="deleteProduct(rowData)"></button>
+                <button pButton pRipple icon="pi pi-user" class="p-button-rounded p-button-success marginleft"
+                  (click)="userinfodata(rowData)"></button>
+                <button type="button" pButton pRipple [pRowToggler]="rowData"
+                  class="p-button-text p-button-rounded p-button-plain marginleft"
+                  [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+              </span>
             </td>
           </tr>
-    </ng-template>
-    <ng-template pTemplate="rowexpansion">
-        <tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion">
+          <tr>
             <td colspan="7">
-                <p-table [value]="detailuserorderinfo" styleClass="p-datatable-customers" >
-                    <ng-template pTemplate="body" let-myorderdataobj>
-                        <tr class="p-selectable-row">
-                            <td colspan="8">     
-                                <div class="container">
-                                  <div class="customer_details">      
-                                                <div class="orderCard">
-                                                  <div class="orderHead">
-                                                    <div class="invoiceDetails">
-                                                      <p style="margin: 0 0 0 0;">Order Placed: <span>{{ myorderdataobj.ordertime}} </span></p>
-                                                      <span style="display: grid;">
-                                                        <p>Total: <span class="customerName">₹{{myorderdataobj.total}}</span> </p>
-                                                      <!-- <a style="color:#28479c;cursor: pointer ;" >Invoice</a> -->
-                                                       </span>
-                                                    </div>
-                                                    <div class="invoiceDetails">
-                                                      <p style="margin: 0 0 0 0;">OrderID: <span>{{ myorderdataobj.orderid}} </span></p>
-                                                      <span style="display: grid;">
-                                                        <p>Ship to: <span class="customerName">{{myorderdataobj.username}}</span></p>
-                                                      <!-- <a style="color:#28479c;cursor: pointer ;" >Invoice</a> -->
-                                                       </span>
-                                                    </div>
-                                                  </div>
-                                                  <div style="padding: 5px;">
-                                                    <p style="margin: 0 0 0 0;"><strong>Status : </strong>{{myorderdataobj.orderstatus_status}}</p>
-                                                    <!-- <p style="margin: 0 0 0 0;">Package was handed to a receptionist</p> -->
-                                                    <!-- <p style="margin: 0 0 0 0;"> Signed by: Priti.</p> -->
-                                                  </div>
-                                                
-                                                  <div *ngFor="let myorderitem of myorderdataobj['data'];let j=index" class="itemDetails">
-                                                    
-                                                    <div class="itemInfo">
-                                                      <div class="itemImg">
-                                                        <img src="{{myorderitem.productimgsrc}}" alt="">
-                                                      </div>
-                                                      <div class="itemDesc">
-                                                        <h4>{{ myorderitem.productname}}</h4>
-                                                        <p class="pspan">Sold by: <span class="pspan">AyodhyaWasi Apna Store</span></p>
-                                                        <span class="pspan" style="display: flex;">Quantity: <span class="pspan">{{myorderitem.quantity}}</span></span>
-                                                        <span class="pspan" style="display: flex;">MRP: <span class="pspan"><del>{{myorderitem.price}} </del> (Inclusive of all taxes)</span></span>
-                                                        <span class="pspan" style="display: flex;">Sell MRP: <span class="pspan">₹{{myorderitem.discountprice}} (Inclusive of all taxes)</span></span>
-                                                      </div>
-                                                    </div>
-          
-                                                  </div>
-                                                </div>
-                                            
-                                             </div>
-                                            </div>
-                              </td>
-                        </tr>    
-                    </ng-template>
-                    <ng-template pTemplate="emptymessage">
-                        <tr>
-                            <td colspan="8">No customers found.</td>
-                            </tr>
-                    </ng-template>
-                </p-table>
+              <p-table [value]="detailuserorderinfo" styleClass="p-datatable-customers">
+                <ng-template pTemplate="body" let-myorderdataobj>
+          <tr class="p-selectable-row">
+            <td colspan="8">
+              <div class="container">
+                <div class="customer_details">
+                  <div class="orderCard">
+                    <div class="orderHead">
+                      <div class="invoiceDetails">
+                        <p style="margin: 0 0 0 0;">Order Placed: <span>{{ myorderdataobj.ordertime}} </span></p>
+                        <span style="display: grid;">
+                          <p>Total: <span class="customerName">₹{{myorderdataobj.total}}</span> </p>
+                          <!-- <a style="color:#28479c;cursor: pointer ;" >Invoice</a> -->
+                        </span>
+                      </div>
+                      <div class="invoiceDetails">
+                        <p style="margin: 0 0 0 0;">OrderID: <span>{{ myorderdataobj.orderid}} </span></p>
+                        <span style="display: grid;">
+                          <p>Ship to: <span class="customerName">{{myorderdataobj.username}}</span></p>
+                          <!-- <a style="color:#28479c;cursor: pointer ;" >Invoice</a> -->
+                        </span>
+                      </div>
+                    </div>
+                    <div style="padding: 5px;">
+                      <p style="margin: 0 0 0 0;"><strong>Status : </strong>{{myorderdataobj.orderstatus_status}}</p>
+                      <!-- <p style="margin: 0 0 0 0;">Package was handed to a receptionist</p> -->
+                      <!-- <p style="margin: 0 0 0 0;"> Signed by: Priti.</p> -->
+                    </div>
+
+                    <div *ngFor="let myorderitem of myorderdataobj['data'];let j=index" class="itemDetails">
+
+                      <div class="itemInfo">
+                        <div class="itemImg">
+                          <img src="{{myorderitem.productimgsrc}}" alt="">
+                        </div>
+                        <div class="itemDesc">
+                          <h4>{{ myorderitem.productname}}</h4>
+                          <p class="pspan">Sold by: <span class="pspan">AyodhyaWasi Apna Store</span></p>
+                          <span class="pspan" style="display: flex;">Quantity: <span
+                              class="pspan">{{myorderitem.quantity}}</span></span>
+                          <span class="pspan" style="display: flex;">MRP: <span class="pspan"><del>{{myorderitem.price}}
+                              </del> (Inclusive of all taxes)</span></span>
+                          <span class="pspan" style="display: flex;">Sell MRP: <span
+                              class="pspan">₹{{myorderitem.discountprice}} (Inclusive of all taxes)</span></span>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             </td>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage">
-        <tr>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
             <td colspan="8">No customers found.</td>
-            </tr>
-    </ng-template>
-</p-table>
-<p-dialog header="Header" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
-    [draggable]="false" [resizable]="false">
-    <div class="inputdialog"><h5>Status</h5><input type="text" pInputText [(ngModel)]="statusval"> </div>
-    <div class="inputdialog"><h5>Seller Approval</h5><input type="text" pInputText [(ngModel)]="selleraprval"> </div>
-    <div class="inputdialog"><h5>On way1</h5><input type="text" pInputText [(ngModel)]="onwayval1"> </div>
-    <div class="inputdialog"><h5>On way2</h5><input type="text" pInputText [(ngModel)]="onwayval2"> </div>
-    <div class="inputdialog"><h5>On way3</h5><input type="text" pInputText [(ngModel)]="onwayval3"> </div>
-    <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" (click)="displayModal=false;submitRecord()" label="Ok" styleClass="p-button-text"></p-button>
-    </ng-template>
+          </tr>
+        </ng-template>
+      </p-table>
+      </td>
+      </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8">No customers found.</td>
+        </tr>
+      </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+</div>
+<p-dialog header="Header" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [draggable]="false"
+  [resizable]="false">
+  <div class="inputdialog">
+    <h5>Status</h5><input type="text" pInputText [(ngModel)]="statusval">
+  </div>
+  <div class="inputdialog">
+    <h5>Seller Approval</h5><input type="text" pInputText [(ngModel)]="selleraprval">
+  </div>
+  <div class="inputdialog">
+    <h5>On way1</h5><input type="text" pInputText [(ngModel)]="onwayval1">
+  </div>
+  <div class="inputdialog">
+    <h5>On way2</h5><input type="text" pInputText [(ngModel)]="onwayval2">
+  </div>
+  <div class="inputdialog">
+    <h5>On way3</h5><input type="text" pInputText [(ngModel)]="onwayval3">
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="displayModal=false;submitRecord()" label="Ok"
+      styleClass="p-button-text"></p-button>
+  </ng-template>
 </p-dialog>
-<p-dialog header="UserInfo"  [(visible)]="displayuserinfodata" [modal]="true" [style]="{width: '90%'}"
-    [draggable]="false">
-     <app-admin-userinfo *ngIf="displayuserinfodata" [rowusername]="rowusername"></app-admin-userinfo>
+<p-dialog header="UserInfo" [(visible)]="displayuserinfodata" [modal]="true" [style]="{width: '90%'}"
+  [draggable]="false">
+  <app-admin-userinfo *ngIf="displayuserinfodata" [rowusername]="rowusername"></app-admin-userinfo>
 </p-dialog>
 
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
