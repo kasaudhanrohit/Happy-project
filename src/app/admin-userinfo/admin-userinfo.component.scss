@@ -2,3 +2,15 @@
     font-family: "Poppins", sans-serif;
     
   }
+
+  
+p-table tr,p-table td ,p-table th {
+  border: 2px solid black; 
+  padding: 7px;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  border: 2px solid black;
+  border-width: 2px 2px 2px 2px;
+  padding: .3rem;
+}

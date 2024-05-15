@@ -1,4 +1,3 @@
-<p>dddddddddddddddd</p>
 <p-table [value]="userorderdata" [columns]="cols" [rows]="10"  (onRowExpand)="getUserOrderdetailindo($event)" [rowsPerPageOptions]="[10,25,50]" dataKey="orderid" >
     <ng-template pTemplate="header" let-columns>
             <th *ngFor="let col of columns">
