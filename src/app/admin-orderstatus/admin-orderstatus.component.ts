@@ -26,9 +26,11 @@ export class AdminOrderstatusComponent implements OnInit {
   detailuserorderinfo = [];
   detailcols = [];
   rowusername = "guest";
+  activeItem = 2;
   constructor(private confirmationService:ConfirmationService,private router:Router,private httpreq : HttprequestService) { }
 
   ngOnInit(): void {
+    this.activeItem = 2;
     this.cols = [
       { field: 'username', header: 'User Name' },
       { field: 'orderid', header: 'OrderId' },
@@ -125,5 +127,26 @@ export class AdminOrderstatusComponent implements OnInit {
     this.rowusername = rowdata.username;
     this.displayuserinfodata = true;
     console.log("userinfodata rowusername : ",this.rowusername);
+  }
+
+  totaluser()
+  {
+    this.activeItem = 0;
+    console.log("total user");
+  }
+  totalorder()
+  {
+    this.activeItem = 1;
+    console.log("total order");
+  }
+  resentorder()
+  {
+    this.activeItem = 2;
+    console.log("recent order");
+  }
+  totalrevenue()
+  {
+    this.activeItem = 3;
+    console.log("total revenue");
   }
 } 

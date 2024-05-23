@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MessageService,ConfirmationService } from 'primeng/api';
-
 @NgModule({
   declarations: [
     AppComponent

@@ -11,11 +11,13 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { AdminUserinfoModule } from '../admin-userinfo/admin-userinfo.module';
 import { CardModule } from 'primeng/card';
+//import { ChartModule } from '../chart/chart.module';
 
 const routes: Routes = [
   { path: '', component: AdminOrderstatusComponent }
 ];
 const imports = [
+  //ChartModule,
   CardModule,
   AdminUserinfoModule,
   InputTextModule,
