@@ -27,6 +27,42 @@ export class AdminOrderstatusComponent implements OnInit {
   detailcols = [];
   rowusername = "guest";
   activeItem = 2;
+  basicData = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [
+        {
+            label: 'My First dataset',
+            data: [65, 59, 80, 81, 56, 55, 40]
+        },
+        {
+            label: 'My Second dataset',
+            data: [28, 48, 40, 19, 86, 27, 90]
+        }
+    ]
+};
+basicOptions = {
+  plugins: {
+      legend: {
+          labels: {
+             // color: '#ebedef'
+          }
+      }
+  },
+  scales: {
+      x: {
+          
+          grid: {
+              color: 'rgba(255,255,255,0.2)'
+          }
+      },
+      y: {
+          
+          grid: {
+              color: 'rgba(255,255,255,0.2)'
+          }
+      }
+  }
+};
   constructor(private confirmationService:ConfirmationService,private router:Router,private httpreq : HttprequestService) { }
 
   ngOnInit(): void {

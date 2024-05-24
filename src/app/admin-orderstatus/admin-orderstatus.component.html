@@ -89,7 +89,10 @@
         <div class="row">
           <div style="display: flex;">
             <div class="col-md-6">
-              Graph
+              <div class="card">
+                <h5>Vertical</h5>
+                <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+              </div>
             </div>
             <div class="col-md-6">
               <p-table [value]="customers" [columns]="cols" [rows]="10" (onRowExpand)="getUserOrderdetailindo($event)"
