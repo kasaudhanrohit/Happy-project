@@ -165,22 +165,61 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6 text-center" *ngFor="let productitem of productiteminfo;let j=index">
-                <div class="single-product-item">
-                    <div class="product-image">
-                        <a (click)="moreinfo(productitem.productname)"><img  src="{{productitem.productimgscr}}" alt=""></a>
+            <div class="bg">
+                <div class="container">
+              
+                  <div class="row py-5">
+                    <div class="col-md-12">
+                      <div class="main-timeline">
+                        <div class="timeline">
+                          <a class="timeline-content">
+                            <div class="timeline-icon">
+                              <i class="pi pi-microchip-ai"></i>
+                            </div>
+                            <h3 class="title">Organic Flour</h3>
+                            <p class="description">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer males uada tellus lorem, et condimentum neque commodo
+                            </p>
+                          </a>
+                        </div>
+                        <div class="timeline">
+                          <a class="timeline-content">
+                            <div class="timeline-icon">
+                              <i class="pi pi-microchip-ai"></i>
+                            </div>
+                            <h3 class="title">Organic Rice</h3>
+                            <p class="description">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer males uada tellus lorem, et condimentum neque commodo
+                            </p>
+                          </a>
+                        </div>
+                        <div class="timeline">
+                          <a  class="timeline-content">
+                            <div class="timeline-icon">
+                              <i class="pi pi-microchip-ai"></i>
+                            </div>
+                            <h3 class="title">Organic Besan</h3>
+                            <p class="description">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer males uada tellus lorem, et condimentum neque commodo
+                            </p>
+                          </a>
+                        </div>
+                        <div class="timeline">
+                          <a class="timeline-content">
+                            <div class="timeline-icon">
+                              <i class="pi pi-microchip-ai"></i>
+                            </div>
+                            <h3 class="title">Organic Sattu</h3>
+                            <p class="description">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer males uada tellus lorem, et condimentum neque commodo
+                            </p>
+                          </a>
+                        </div>
+                      </div>
                     </div>
-                    <h3>{{productitem.productname}}</h3>
-                    <p>M.R.P: <del>{{productitem.price}} </del> (Inclusive of all taxes) </p>
-                    <p>Offer Price : <span>₹{{productitem.discountprice}} (Inclusive of all taxes)</span></p>
-                    <!-- <p class="product-price">Per Kg : {{productitem.pricekg}} </p> -->
-                    <a  class="cart-btn"  (click)="moreinfo(productitem.productname)">Know More <i class="pi pi-angle-right"></i> </a>
-                    <a  class="cart-btn" (click)="addtocart(productitem)"><i class="pi pi-shopping-cart" pBadge value="{{productitem.cartvalue == 0 ? '' : productitem.cartvalue}}"></i> Add to Cart</a>
-                    <a  *ngIf="productitem.cartvalue !== 0" class="cart-btn" pTooltip="Remove to cart" (click)="removefromcart(productitem)"><i class="pi pi-caret-left"></i></a>
-                    {{productitem.cartvalue == 0 ? '' : productitem.cartvalue}}
-                    <a *ngIf="productitem.cartvalue !== 0" class="cart-btn" pTooltip="Add from cart" (click)="addtocart(productitem)"><i class="pi pi-caret-right"></i></a>
+                  </div>
                 </div>
-            </div>
+              </div>
         </div>
         <!-- <a class="cart-btn" pTooltip="Add from cart" (click)="placeOrder()" >Place Order <i class="pi pi-truck"></i></a> -->
     </div>
